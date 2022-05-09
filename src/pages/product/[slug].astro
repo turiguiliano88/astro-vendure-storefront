@@ -1,0 +1,33 @@
+---
+import Base from '../../layouts/base.astro';
+import { getProducts, getActiveOrder } from '../../api/shop';
+// import App from '../../components/App';
+import ProductPage from '../../product-page/index';
+
+export async function getStaticPaths() {
+    const data = await getProducts();
+    return data.products.items.map(item => {
+        return {
+            params: {
+                slug: item.slug
+            },
+            props: {
+                product: item
+            }
+        }
+    })
+
+}
+
+const {slug} = Astro.params;
+const {product} = Astro.props;
+
+// const url = new URL(Astro.request.url);
+// const token = url.searchParams.get('auth_token');
+
+// const order = (await getActiveOrder(token)).activeOrder
+---
+
+<Base title="product">
+<ProductPage client:load product={product} />
+</Base>

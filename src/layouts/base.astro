@@ -1,0 +1,30 @@
+---
+import '../styles/global.css';
+// import Nav from '../components/Nav.jsx'
+import Footer from '../components/Footer'
+// import { addItemsToOder, getActiveOrder } from "../api/shop"
+import { Spa } from 'astro-spa';
+
+const {title} = Astro.props;
+
+// const cookie = Astro.request.headers.get('cookie');
+
+// console.log('cookie', Astro.request.headers);
+// const activeOrder = await getActiveOrder();
+---
+
+<html lang="end">
+<head>
+    <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" href="../node_modules/@splidejs/react-splide/dist/css/splide.min.css">
+	<title>{title}</title>
+</head>
+<body class="flex justify-center">
+    <Spa />
+    <div class="w-full" id="root">
+    <slot />
+    <Footer />
+    </div>
+</body>
+</html>

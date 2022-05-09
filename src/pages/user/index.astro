@@ -1,0 +1,10 @@
+---
+import Base from "../../layouts/base.astro";
+import App from '../../user-page/index'
+
+const {slug} = Astro.params;
+---
+
+<Base>
+<App client:load path={slug} />
+</Base>

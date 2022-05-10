@@ -5,29 +5,41 @@ import { useEffect, useState, useCallback } from "react";
 import { getActiveOrder, getActiveCustomer } from "../api/shop";
 import { Card, CardContent, CardTitle } from "../components/ui/Card";
 import ItemCard from "../components/ItemCard";
+import useStore from "../components/hook/useStore";
+import Loading from "../components/ui/Loading";
 export default function App({ products }) {
-  const [customer, setCustomer] = useState({});
-  const [order, setOrder] = useState({});
+  const [customer, setCustomer] = useState(null);
+  const [order, setOrder] = useState(null);
+  const [isloading, setIsLoading] = useState(false);
   console.log("customer", customer);
 
   useEffect(() => {
-    const fetchCustomer = async () => {
-      const data = await getActiveCustomer();
-      if (data.activeCustomer?.id !== customer) {
-        setCustomer(data.activeCustomer);
-        // localStorage.customer = JSON.stringify(data.activeCustomer);
-      }
-    };
+    // const fetchCustomer = async () => {
+    //   const data = await getActiveCustomer();
+    //   if (data.activeCustomer?.id !== customer) {
+    //     setCustomer(data.activeCustomer);
+    //     // localStorage.customer = JSON.stringify(data.activeCustomer);
+    //   }
+    // };
 
-    const fetchOrder = async () => {
-      const data = await getActiveOrder();
-      if (data.activeOrder?.id !== order?.id) {
-        setOrder(data.activeOrder);
-        // localStorage.order = JSON.stringify(data.activeOrder);
-      }
-    };
-    fetchCustomer();
-    fetchOrder();
+    // const fetchOrder = async () => {
+    //   const data = await getActiveOrder();
+    //   if (data.activeOrder?.id !== order?.id) {
+    //     setOrder(data.activeOrder);
+    //     // localStorage.order = JSON.stringify(data.activeOrder);
+    //   }
+    // };
+    // fetchCustomer();
+    // fetchOrder();
+    async function fetchData() {
+      setIsLoading(true);
+      let data = await getActiveCustomer();
+      setCustomer(data.activeCustomer);
+      data = await getActiveOrder();
+      setOrder(data.activeOrder);
+      setIsLoading(false);
+    }
+    fetchData();
   }, []);
   return (
     <div>
@@ -37,7 +49,7 @@ export default function App({ products }) {
           customer.firstName &&
           `${customer.firstName} ${customer.lastName}`
         }
-        totalQuantity={order.totalQuantity}
+        totalQuantity={order?.totalQuantity}
       />
       <div className="max-w-7xl my-lg mx-auto">
         <Card>

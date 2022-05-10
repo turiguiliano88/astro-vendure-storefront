@@ -59,19 +59,22 @@ export default function ProductCard({ product, setOrder }) {
           description="Description"
           content="Somethinbg"
         /> */}
+        <div className="my-xs text-lg font-semibold">
+          €{currentVariant?.price * quantity}
+        </div>
         <div className="my-sm">
           <div dangerouslySetInnerHTML={{ __html: product.description }}></div>
           {/* {product.description} */}
         </div>
-        <div className="my-xs">
+        <div className="my-sm text-sm">
           {product.variants.map((item, index) => {
             return (
               <span
                 key={index}
                 className={
                   currentVariant?.id === item.id
-                    ? `bg-neutral-300 py-xs px-sm mr-xs mb-xs inline-flex rounded-md`
-                    : `bg-neutral-100 py-xs px-sm mr-xs mb-xs inline-flex rounded-md`
+                    ? `bg-neutral-800 text-white py-xs px-sm mr-xs mb-xs inline-flex rounded-md cursor-pointer`
+                    : `bg-neutral-100 py-xs px-sm mr-xs mb-xs inline-flex rounded-md cursor-pointer`
                 }
                 onClick={() => setCurrentVariant(item)}
               >
@@ -80,19 +83,19 @@ export default function ProductCard({ product, setOrder }) {
             );
           })}
         </div>
-        {currentVariant && (
-          <div className="my-xs">€{currentVariant?.price * quantity}</div>
-        )}
-        <div className="w-fit">
-          <Select
-            options={[
-              { name: 1, value: 1 },
-              { name: 2, value: 2 },
-            ]}
-            onChange={(event) => setQuantity(event.target.value)}
-          />
+
+        <div className="flex">
+          <div className="mr-xs">
+            <Select
+              options={[
+                { name: 1, value: 1 },
+                { name: 2, value: 2 },
+              ]}
+              onChange={(event) => setQuantity(event.target.value)}
+            />
+          </div>
+          <Button onClick={addToBag}>Add to bag</Button>
         </div>
-        <Button onClick={addToBag}>Add to bag</Button>
       </div>
     </div>
   );

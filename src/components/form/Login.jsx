@@ -33,18 +33,22 @@ export default function Login({ setCustomer }) {
       <Card>
         <CardTitle>Log In</CardTitle>
         <CardContent>
-          <Input
-            label="Email*"
-            onChange={(event) => setEmail(event.target.value)}
-            required
-            type="email"
-          />
-          <Input
-            label="Password*"
-            onInput={(event) => setPassword(event.target.value)}
-            required
-            type="password"
-          />
+          <div className="mb-xs">
+            <Input
+              label="Email*"
+              onChange={(event) => setEmail(event.target.value)}
+              required
+              type="email"
+            />
+          </div>
+          <div className="mb-xs">
+            <Input
+              label="Password*"
+              onInput={(event) => setPassword(event.target.value)}
+              required
+              type="password"
+            />
+          </div>
           <div className="mb-md">
             <Check
               label="Remember me"

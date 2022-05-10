@@ -20,5 +20,6 @@ export const createQuery = async ({ query, variables }) => {
   //   localStorage.auth_token = auth_token;
   // }
   const json = await response.json();
+  console.log("response ", json.data);
   return json.data;
 };

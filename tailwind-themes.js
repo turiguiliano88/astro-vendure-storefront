@@ -37,8 +37,8 @@ module.exports = {
     extend: {
       colors: {
         primary: colors.red["600"],
-        secondary: colors.cyan["400"],
-        neutral: colors.gray,
+        secondary: colors.green["400"],
+        neutral: colors.neutral,
       },
       spacing: {
         xs: "8px",

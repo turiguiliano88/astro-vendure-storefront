@@ -9,7 +9,7 @@ export default function Menu(props) {
   return (
     <div className="m-sm bg-white">
       {props.tabs.map((item, index) => (
-        <a href={item.href}>
+        <a href={item.href} key={index}>
           <div
             className={
               item.name === props.activeTab

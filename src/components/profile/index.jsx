@@ -3,7 +3,7 @@ import ProfileOrder from "./Order";
 import ProfileAccount from "./Account";
 import ProfileAddress from "./Address";
 import { useState, useCallback, useEffect } from "react";
-import { useRecoilState } from "recoil";
+// import { useRecoilState } from "recoil";
 import { customerState } from "../../store";
 import { getActiveCustomer } from "../../api/shop";
 import Button from "../ui/Button";
@@ -36,9 +36,9 @@ export default function Profile({ customer, setCustomer, path }) {
           <div className="w-[300px]">
             <ProfileMenu activeTab={activeTab} tabs={options} />
           </div>
-          {activeTab === "order" && <ProfileOrder />}
-          {activeTab === "account" && <ProfileAccount />}
-          {activeTab === "address" && <ProfileAddress customer={customer} />}
+          {activeTab === "Order" && <ProfileOrder />}
+          {activeTab === "Account" && <ProfileAccount />}
+          {activeTab === "Address" && <ProfileAddress customer={customer} />}
         </div>
       ) : (
         <div className="max-w-sm my-sm mx-auto">

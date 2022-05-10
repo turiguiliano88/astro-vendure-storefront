@@ -5,10 +5,8 @@ import { useEffect, useState, useCallback } from "react";
 import { getActiveOrder, getActiveCustomer } from "../api/shop";
 
 export default function App({ product }) {
-  const [customer, setCustomer] = useState(
-    JSON.parse(localStorage.customer || "{}")
-  );
-  const [order, setOrder] = useState({});
+  const [customer, setCustomer] = useState(null);
+  const [order, setOrder] = useState(null);
   console.log("customer", customer);
 
   useEffect(() => {
@@ -38,7 +36,7 @@ export default function App({ product }) {
           customer.firstName &&
           `${customer.firstName} ${customer.lastName}`
         }
-        totalQuantity={order.totalQuantity}
+        totalQuantity={order?.totalQuantity}
       />
       <div className="max-w-7xl my-lg mx-auto">
         <ProductCard product={product} setOrder={setOrder} />

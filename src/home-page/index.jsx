@@ -48,7 +48,7 @@ export default function App({ products }) {
                 return (
                   <div className="w-1/2 md:w-1/3 xl:w-1/4" key={index}>
                     <ItemCard
-                      img_url={item.featuredAsset.preview}
+                      img_url={item.featuredAsset?.preview}
                       path={`product/${item.slug}`}
                       name={item.name}
                       price={item.variants[0].price}

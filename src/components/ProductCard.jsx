@@ -50,7 +50,7 @@ export default function ProductCard({ product, setOrder }) {
             );
           })}
         </Splide> */}
-        <img className="w-full" src={product.featuredAsset.preview} />
+        <img className="w-full" src={product.featuredAsset?.preview} />
       </div>
       <div className="w-full md:w-2/3 p-xs">
         <h1 className="text-2xl font-semibold">{product.name}</h1>

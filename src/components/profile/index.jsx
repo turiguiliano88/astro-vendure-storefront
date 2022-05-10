@@ -37,8 +37,16 @@ export default function Profile({ customer, setCustomer, path }) {
             <ProfileMenu activeTab={activeTab} tabs={options} />
           </div>
           {activeTab === "Order" && <ProfileOrder />}
-          {activeTab === "Account" && <ProfileAccount />}
-          {activeTab === "Address" && <ProfileAddress customer={customer} />}
+          {activeTab === "Account" && (
+            <ProfileAccount
+              firstName={customer.firstName}
+              lastName={customer.lastName}
+              phoneNumber={customer.phoneNumber}
+            />
+          )}
+          {activeTab === "Address" && (
+            <ProfileAddress addresses={customer.addresses} />
+          )}
         </div>
       ) : (
         <div className="max-w-sm my-sm mx-auto">

@@ -3,7 +3,7 @@ import Button from "../ui/Button";
 import Badge from "../ui/Badge";
 // import { state } from "../../store";
 // import { For, Show } from "solid-js";
-export default function ProfileAddress({ customer }) {
+export default function ProfileAddress({ addresses }) {
   return (
     <Card>
       <CardTitle>
@@ -15,7 +15,7 @@ export default function ProfileAddress({ customer }) {
         </div>
       </CardTitle>
       <CardContent>
-        {customer?.addresses?.map((item, index) => (
+        {addresses?.map((item, index) => (
           <div
             className="p-sm border-2 border-neutral-300 w-fit relative"
             key={index}

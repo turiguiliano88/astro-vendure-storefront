@@ -1,9 +1,14 @@
 import Button from "../ui/Button";
 import Input from "../ui/Input";
 import { useState, useEffect, useCallback } from "react";
-import { getEligibleShippingMethods } from "../../api/shop";
+import {
+  getEligibleShippingMethods,
+  setOrderShippingMethod,
+  setOrderShippingAddress,
+  transitionOrderToState,
+} from "../../api/shop";
 
-export default function Shipping() {
+export default function Shipping({ setOrder }) {
   const [shippingMethod, setShippingMethod] = useState(0);
   const [shippingMethods, setShippingMethods] = useState([]);
   const [fullName, setFullName] = useState("");
@@ -27,19 +32,21 @@ export default function Shipping() {
     <form
       onSubmit={async (event) => {
         event.preventDefault();
-        // if (shippingMethod)
-        //   await state.setOrderShippingMethod(shippingMethod());
+        if (shippingMethod) await setOrderShippingMethod(shippingMethod);
         // console.log(
-        //   await state.setOrderShippingAddress(
-        //     fullName(),
-        //     streetLine1(),
-        //     streetLine2(),
-        //     city(),
-        //     province(),
-        //     phoneNumber()
-        //   )
+        await setOrderShippingAddress(
+          fullName,
+          streetLine1,
+          streetLine2,
+          city,
+          province,
+          phoneNumber
+        );
         // );
-        // await state.transitionOrderToState("ArrangingPayment");
+        setOrder(
+          await transitionOrderToState("ArrangingPayment")
+            .transitionOrderToState
+        );
       }}
     >
       <div className="text-lg bg-neutral-100 p-sm mb-xs">Step 1: Shipping</div>

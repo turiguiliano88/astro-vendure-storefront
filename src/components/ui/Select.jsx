@@ -8,7 +8,7 @@ export default function Select(props) {
         <select
           onChange={props.onChange}
           defaultValue={props.selected}
-          className="appearance-none w-full bg-transparent focus:outline-none"
+          className="w-full bg-transparent focus:outline-none after:content-['*']"
         >
           {props.options &&
             props.options.map((o) => (
@@ -17,7 +17,6 @@ export default function Select(props) {
               </option>
             ))}
         </select>
-        <SelectorIcon className="w-4 h-4 text-neutral-600" />
       </div>
     </div>
   );

@@ -40,7 +40,7 @@ export default function ProductCard({ product, setOrder }) {
   };
   return (
     <div className="flex p-sm flex-wrap md:flex-nowrap">
-      <div className="w-full md:w-1/3 pr-xs">
+      <div className="w-full md:w-1/3">
         {/* <Splide aria-label="Splide Basic HTML Example">
           {product.assets.map((item, index) => {
             return (
@@ -52,7 +52,7 @@ export default function ProductCard({ product, setOrder }) {
         </Splide> */}
         <img className="w-full" src={product.featuredAsset?.preview} />
       </div>
-      <div className="w-full md:w-2/3 p-xs">
+      <div className="w-full md:w-2/3 p-xs md:p-sm">
         <h1 className="text-2xl font-semibold">{product.name}</h1>
         {/* <Disclosure
           client:visible

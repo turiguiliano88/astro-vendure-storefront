@@ -13,8 +13,8 @@ export default function Menu(props) {
           <div
             className={
               item.name === props.activeTab
-                ? "bg-neutral-300 p-sm flex justify-between items-center"
-                : "p-sm flex justify-between items-center cursor-pointer hover:bg-neutral-100"
+                ? "bg-neutral-200 p-sm flex justify-between items-center"
+                : "p-sm flex justify-between items-center cursor-pointer hover:bg-neutral-50"
             }
             key={index}
             onClick={item.onClick}

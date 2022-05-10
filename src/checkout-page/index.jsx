@@ -30,9 +30,16 @@ export default function App({ path }) {
   console.log("href", path);
   return (
     <div>
-      <Nav />
+      <Nav
+        customerName={
+          customer &&
+          customer.firstName &&
+          `${customer.firstName} ${customer.lastName}`
+        }
+        totalQuantity={order?.totalQuantity}
+      />
       <div className="max-w-7xl my-lg mx-auto">
-        <Checkout order={order} />
+        <Checkout order={order} setOrder={setOrder} />
       </div>
     </div>
   );

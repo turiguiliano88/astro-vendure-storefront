@@ -11,8 +11,8 @@ export default function App({ path }) {
   //   const [customer, setCustomer] = useState(
   //     JSON.parse(localStorage.customer || "{}")
   //   );
-  const [customer, setCustomer] = useState({});
-  const [order, setOrder] = useState({});
+  const [customer, setCustomer] = useState(null);
+  const [order, setOrder] = useState(null);
   console.log("customer", customer);
 
   useEffect(() => {
@@ -43,10 +43,10 @@ export default function App({ path }) {
           customer.firstName &&
           `${customer.firstName} ${customer.lastName}`
         }
-        totalQuantity={order.totalQuantity}
+        totalQuantity={order?.totalQuantity}
       />
       <div>
-        <Profile customer={customer} />
+        <Profile customer={customer} setCustomer={setCustomer} path={path} />
       </div>
     </RecoilRoot>
   );

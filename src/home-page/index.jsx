@@ -46,7 +46,7 @@ export default function App({ products }) {
             <div className="flex flex-wrap">
               {products?.items?.map((item, index) => {
                 return (
-                  <div className="w-1/2 md:w-1/3 xl:w-1/4" key={index}>
+                  <div className="w-1/2 md:w-1/3 xl:w-1/4 p-sm" key={index}>
                     <ItemCard
                       img_url={item.featuredAsset?.preview}
                       path={`product/${item.slug}`}

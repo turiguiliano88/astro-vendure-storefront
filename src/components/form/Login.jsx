@@ -5,12 +5,12 @@ import Check from "../ui/Check";
 // import { createClient } from "../../utils/client";
 // import { onMount, createSignal } from "solid-js";
 import { useEffect, useState } from "react";
-import { login } from "../../api/client";
+import { login, getActiveCustomer } from "../../api/shop";
 // import Link from "next/link";
 // import { useState } from "react";
 // import { state } from "../../store";
 
-export default function Login() {
+export default function Login({ setCustomer }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
@@ -26,6 +26,8 @@ export default function Login() {
           rememberMe: rememberMe,
         });
         console.log(id);
+        const data = await getActiveCustomer();
+        setCustomer(data.activeCustomer);
       }}
     >
       <Card>

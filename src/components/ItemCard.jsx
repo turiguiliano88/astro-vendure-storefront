@@ -2,11 +2,11 @@ import Link from "./ui/Link";
 
 export default function ItemCard({ name, price, img_url, path }) {
   return (
-    <div className="relative m-sm">
-      <div className="object-cover cursor-pointer">
-        <Link href={path}>
-          <img src={img_url} className="" />
-        </Link>
+    <div className="relative h-full">
+      <div className="h-full cursor-pointer">
+        <a href={path} className="h-full flex">
+          <img src={`${img_url}?preset=large`} className="object-cover" />
+        </a>
       </div>
       <div className="bg-white py-xxs px-sm absolute right-xs top-xs rounded-sm drop-shadow-lg">
         <div className="text-sm">{name}</div>

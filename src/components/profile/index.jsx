@@ -6,7 +6,9 @@ import { useState, useCallback, useEffect } from "react";
 import { useRecoilState } from "recoil";
 import { customerState } from "../../store";
 import { getActiveCustomer } from "../../api/shop";
-export default function Profile({ customer }) {
+import Button from "../ui/Button";
+import Login from "../form/Login";
+export default function Profile({ customer, setCustomer, path }) {
   const [activeTab, setActiveTab] = useState("Order");
   // const [customer, setCustomer] = useRecoilState(customerState);
   // const fetchData = useCallback(async () => {
@@ -24,19 +26,25 @@ export default function Profile({ customer }) {
       onClick: () => {
         setActiveTab(item);
       },
+      // href: "/profile/" + item.toLowerCase(),
     };
   });
   return (
-    <div className="flex">
-      <div className="w-[300px]">
-        <ProfileMenu activeTab={activeTab} tabs={options} />
-      </div>
-      {/* <div className="">
-        <ProfileOrder />
-      </div> */}
-      {activeTab === "Order" && <ProfileOrder />}
-      {activeTab === "Account" && <ProfileAccount />}
-      {activeTab === "Address" && <ProfileAddress customer={customer} />}
-    </div>
+    <>
+      {customer ? (
+        <div className="flex">
+          <div className="w-[300px]">
+            <ProfileMenu activeTab={activeTab} tabs={options} />
+          </div>
+          {activeTab === "order" && <ProfileOrder />}
+          {activeTab === "account" && <ProfileAccount />}
+          {activeTab === "address" && <ProfileAddress customer={customer} />}
+        </div>
+      ) : (
+        <div className="max-w-sm my-sm mx-auto">
+          <Login setCustomer={setCustomer} />
+        </div>
+      )}
+    </>
   );
 }

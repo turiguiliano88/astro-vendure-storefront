@@ -8,15 +8,8 @@ export default function Menu(props) {
   console.log("tabs", props.tabs);
   return (
     <div className="m-sm bg-white">
-      {props.tabs
-        .map((item) => {
-          return {
-            name: item.name,
-            value: item.value,
-            onClick: item.onClick,
-          };
-        })
-        .map((item, index) => (
+      {props.tabs.map((item, index) => (
+        <a href={item.href}>
           <div
             className={
               item.name === props.activeTab
@@ -29,7 +22,8 @@ export default function Menu(props) {
             {item.value}
             <ChevronRightIcon className="h-3 w-3" />
           </div>
-        ))}
+        </a>
+      ))}
     </div>
   );
 }

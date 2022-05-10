@@ -2,9 +2,9 @@ import SelectorIcon from "../icon/Selector";
 
 export default function Select(props) {
   return (
-    <div className="text-gray-800 mb-xs flex flex-col">
+    <div className="text-neutral-800 flex flex-col">
       {props.label && <div className="mb-xxs">{props.label}</div>}
-      <div className="flex items-center rounded-sm grow px-sm py-xs border-gray-200 border-2 focus-within:border-primary">
+      <div className="flex items-center rounded-sm grow px-sm py-xs border-neutral-200 border-2 focus-within:border-primary">
         <select
           onChange={props.onChange}
           defaultValue={props.selected}
@@ -17,7 +17,7 @@ export default function Select(props) {
               </option>
             ))}
         </select>
-        <SelectorIcon className="w-4 h-4 text-gray-600" />
+        <SelectorIcon className="w-4 h-4 text-neutral-600" />
       </div>
     </div>
   );

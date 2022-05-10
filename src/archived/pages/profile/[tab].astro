@@ -1,0 +1,35 @@
+---
+import Base from "../../layouts/base.astro";
+import App from '../../profile-page'
+
+export function getStaticPaths() {
+    return [
+        {
+            params: {
+                tab: 'login'
+            }
+        },
+        {
+            params: {
+                tab: 'order'
+            }
+        },
+        {
+            params: {
+                tab: 'address'
+            }
+        },
+        {
+            params: {
+                tab: 'account'
+            }
+        },
+    ]
+}
+
+const {path} = Astro.params 
+---
+
+<Base>
+<App client:load path={path} />
+</Base>

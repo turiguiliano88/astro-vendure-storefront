@@ -3,6 +3,8 @@ import UserIcon from "./icon/User";
 // import { state } from "../store";
 import Button from "../components/ui/Button";
 import Link from "./ui/Link";
+import Input from "./ui/Input";
+import SearchIcon from "./icon/Search";
 
 export default function Nav({ totalQuantity, customerName }) {
   // console.log("order", state.order);
@@ -55,6 +57,9 @@ export default function Nav({ totalQuantity, customerName }) {
       <span className="font-semibold text-lg">
         <Link href="/">muavagui</Link>
       </span>
+      <div className="flex grow px-xs">
+        <Input icon={<SearchIcon className="w-4 h-4" />} type="text" />
+      </div>
       {/* <div>
         <span className="mx-xs opacity-60 hover:opacity-100 hover:before:content-['→_']">
           <Link href="/about-us">About us</Link>
@@ -80,9 +85,11 @@ export default function Nav({ totalQuantity, customerName }) {
             </a>
           </div>
         )} */}
-        <a href="/user">
+        {/* <a href={customerName ? "/profile/order" : "/profile/login"}> */}
+        <a href="/profile">
           <UserIcon className="w-5 h-5" />
         </a>
+        {/* </a> */}
         <div className="relative">
           <a href="/cart">
             <ShoppingBagIcon className="w-5 h-5" />

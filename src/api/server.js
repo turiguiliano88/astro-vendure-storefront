@@ -82,6 +82,7 @@ export async function getActiveCustomer(cookie) {
         lastName
         firstName
         emailAddress
+        phoneNumber
         addresses {
           fullName
           streetLine1

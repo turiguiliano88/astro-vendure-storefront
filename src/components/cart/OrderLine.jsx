@@ -1,5 +1,9 @@
 import Select from "../ui/Select";
-export default function OrderLine({ line, quantities }) {
+import { adjustOrderLine, removeOrderLine } from "../../api/client";
+import TrashIcon from "../icon/Trash";
+import Input from "../ui/Input";
+
+export default function OrderLine({ line, quantities, setOrder }) {
   // const quantit = [1, 2, 3, 4, 5, 6, 7];
   return (
     <div className="flex justify-center text-neutral-600">
@@ -15,16 +19,37 @@ export default function OrderLine({ line, quantities }) {
           <div className="text-sm my-xs">{line.productVariant.name}</div>
           <div className="w-max">
             {quantities ? (
-              <Select
-                options={quantities.map((item) => {
-                  return {
-                    name: item,
-                    value: item,
-                    // selected: item == line.quantity ? true : false,
-                  };
-                })}
-                selected={line.quantity}
-              />
+              <div className="flex items-center">
+                <Select
+                  options={quantities.map((item) => {
+                    return {
+                      name: item,
+                      value: item,
+                      // selected: item == line.quantity ? true : false,
+                    };
+                  })}
+                  selected={line.quantity}
+                  onChange={async (event) => {
+                    const data = await adjustOrderLine(
+                      Number(line.id),
+                      Number(event.target.value)
+                    );
+                    console.log("change ", data);
+                    setOrder(data);
+                  }}
+                />
+                {/* <div className="">
+                  <Input type="number" />
+                </div> */}
+                <div
+                  className="ml-xs cursor-pointer"
+                  onClick={async () => {
+                    setOrder(await removeOrderLine(line.id).removeOrderLine);
+                  }}
+                >
+                  <TrashIcon className="w-4 h-4" />
+                </div>
+              </div>
             ) : (
               "x " + line.quantity
             )}

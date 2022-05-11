@@ -37,21 +37,24 @@ export default function Profile({ customer, setCustomer, path }) {
           <div className="w-full md:w-1/3">
             <ProfileMenu activeTab={activeTab} tabs={options} />
           </div>
-          {activeTab === "Order" && (
-            <div className="grow">
+          <div className="grow">
+            {activeTab === "Order" && (
               <ProfileOrder orders={customer?.orders?.items} />
-            </div>
-          )}
-          {activeTab === "Account" && (
-            <ProfileAccount
-              firstName={customer.firstName}
-              lastName={customer.lastName}
-              phoneNumber={customer.phoneNumber}
-            />
-          )}
-          {activeTab === "Address" && (
-            <ProfileAddress addresses={customer.addresses} />
-          )}
+            )}
+            {activeTab === "Account" && (
+              <ProfileAccount
+                // firstName={customer.firstName}
+                // lastName={customer.lastName}
+                // phoneNumber={customer.phoneNumber}
+                // emailAddress={customer.emailAddress}
+                customer={customer}
+                setCustomer={setCustomer}
+              />
+            )}
+            {activeTab === "Address" && (
+              <ProfileAddress addresses={customer.addresses} />
+            )}
+          </div>
         </div>
       ) : (
         <div className="max-w-sm my-sm mx-auto">

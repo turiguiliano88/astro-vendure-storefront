@@ -16,7 +16,10 @@ export default function Payment({ setOrder }) {
     <form
       onSubmit={async (event) => {
         event.preventDefault();
-        await addPaymentToOrder(paymentMethod?.code, { id: 12 });
+        setOrder(
+          await addPaymentToOrder(paymentMethod?.code, { id: 12 })
+            .addPaymentToOrder
+        );
         // if (paymentMethod) await state.set
       }}
     >

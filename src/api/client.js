@@ -73,6 +73,7 @@ export async function getActiveCustomer() {
         lastName
         firstName
         emailAddress
+        phoneNumber
         addresses {
           fullName
           streetLine1
@@ -280,6 +281,53 @@ export async function search(term) {
           }
           productName
           slug
+        }
+      }
+    }
+    `,
+  });
+}
+
+export async function updateCustomer(firstName, lastName, phoneNumber) {
+  return await createQuery({
+    query: `
+    mutation {
+      updateCustomer(input: {
+        firstName: "${firstName}",
+        lastName: "${lastName}",
+        phoneNumber: "${phoneNumber}"
+      }) {
+        id
+        firstName
+        lastName
+        phoneNumber
+      }
+    }
+    `,
+  });
+}
+
+export async function adjustOrderLine(orderLineId, quantity) {
+  return await createQuery({
+    query: `
+    mutation {
+      adjustOrderLine(orderLineId: ${orderLineId}, quantity: ${quantity}) {
+        ... on Order {
+          ${OrderSchema}
+        }
+      }
+    }
+    `,
+  });
+}
+
+export async function removeOrderLine(orderLineId) {
+  return await createQuery({
+    query: `
+    mutation {
+      removeOrderLine(orderLineId: ${orderLineId}) {
+        ... on Order {
+          ${OrderSchema}
         }
       }
     }

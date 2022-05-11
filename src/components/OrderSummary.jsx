@@ -9,16 +9,16 @@ export default function OrderSummary({ order }) {
         <CardContent>
           <div className="flex justify-between">
             <span>Subtotal</span>
-            <span>€{order.subTotal}</span>
+            <span>€{order?.subTotal}</span>
           </div>
           <div className="flex justify-between">
             <span>Shipping</span>
-            <span>€{order.shipping}</span>
+            <span>€{order?.shipping}</span>
           </div>
           <hr className="my-sm border-2 border-neutral-600" />
           <div className="flex justify-between mb-sm">
             <span>Total</span>
-            <span>€{order.total}</span>
+            <span>€{order?.total}</span>
           </div>
           <a href="/checkout">
             <Button>Checkout</Button>

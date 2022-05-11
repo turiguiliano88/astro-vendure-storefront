@@ -1,20 +1,20 @@
-import OrderLine from "../cart/OrderLine";
-import OrderSummary from "../OrderSummary";
-import { Card, CardTitle, CardContent } from "../ui/Card";
-import Button from "../ui/Button";
-import Nav from "../Nav";
+import OrderLine from "../components/cart/OrderLine";
+import OrderSummary from "../components/OrderSummary";
+import { Card, CardTitle, CardContent } from "../components/ui/Card";
+import Button from "../components/ui/Button";
+import Nav from "../components/Nav";
 import { useState, useEffect } from "react";
-import { getActiveOrder, getActiveCustomer } from "../../api/shop";
+import { adjustOrderLine } from "../api/client";
 
 export default function App({ order, customerName }) {
   //   const [customer, setCustomer] = useState({});
-  const [localOrder, setOrder] = useState(order);
+  const [localOrder, setLocalOrder] = useState(order);
 
   return (
     <div>
       <Nav
         customerName={customerName}
-        totalQuantity={localOrder.totalQuantity}
+        totalQuantity={localOrder?.totalQuantity}
       />
       <div className="max-w-7xl my-lg mx-auto">
         <div className="flex flex-wrap md:flex-nowrap">
@@ -22,9 +22,14 @@ export default function App({ order, customerName }) {
             <Card>
               <CardTitle>Cart</CardTitle>
               <CardContent>
-                {localOrder.lines &&
-                  localOrder.lines.map((line, index) => (
-                    <OrderLine key={index} line={line} />
+                {localOrder?.lines &&
+                  localOrder?.lines.map((line, index) => (
+                    <OrderLine
+                      key={index}
+                      line={line}
+                      quantities={[1, 2, 3]}
+                      setOrder={setLocalOrder}
+                    />
                   ))}
               </CardContent>
             </Card>

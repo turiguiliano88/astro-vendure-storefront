@@ -31,12 +31,14 @@ export default function Button(props) {
       break;
   }
 
+  let loadingStyle = props.isLoading ? "animate-pulse" : "";
   return (
     <button
       onClick={props.onClick}
       type={props.submit ? "submit" : "button"}
       // className={`${styleColor} ${styleSize} transition flex-initial rounded-lg hover:ring-2 active:opacity-70 hover:before:content-['→_']`}
-      className={`${styleColor} ${styleSize} transition flex-initial rounded-lg hover:ring-2 active:opacity-70`}
+      className={`${styleColor} ${styleSize} ${loadingStyle} transition flex-initial rounded-lg hover:ring-2 active:opacity-70`}
+      disabled={props.isLoading}
     >
       {props.children}
     </button>

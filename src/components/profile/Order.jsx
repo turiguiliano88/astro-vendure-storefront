@@ -16,7 +16,7 @@ export default function ProfileOrder({ orders }) {
             <Disclosure
               key={index}
               title={
-                <div className="p-sm border-2 border-neutral-200 cursor-pointer hover:bg-neutral-200">
+                <div className="mb-xs p-sm border-2 border-neutral-200 cursor-pointer hover:bg-neutral-200">
                   <div className="text-lg font-medium">
                     Order code: {order.code}
                   </div>

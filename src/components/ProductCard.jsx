@@ -9,12 +9,13 @@ import { useState } from "react";
 // import { Splide, SplideSlide } from "@splidejs/react-splide";
 // import pkg from "@splidejs/react-splide";
 // const { Splide2, SplideSlide } = pkg;
-import { addItemToOrder, getActiveOrder } from "../api/shop";
+import { addItemToOrder, getActiveOrder } from "../api/client";
 // import { state } from "../store";
 
 export default function ProductCard({ product, setOrderQuantity }) {
   const [currentVariant, setCurrentVariant] = useState(product.variants[0]);
   const [quantity, setQuantity] = useState(1);
+  const [isLoading, setIsLoading] = useState(false);
   // onMount(() => {
   //   new Splide(".splide").mount();
   // });
@@ -94,7 +95,9 @@ export default function ProductCard({ product, setOrderQuantity }) {
               onChange={(event) => setQuantity(event.target.value)}
             />
           </div>
-          <Button onClick={addToBag}>Add to bag</Button>
+          <Button isLoading={isLoading} onClick={addToBag}>
+            Add to bag
+          </Button>
         </div>
       </div>
     </div>

@@ -8,7 +8,7 @@ export default function ItemCard({ name, price, img_url, path }) {
           <img src={`${img_url}?preset=large`} className="object-cover" />
         </a>
       </div>
-      <div className="bg-white py-xxs px-sm absolute right-xs top-xs rounded-sm drop-shadow-lg">
+      <div className="bg-white py-xxs px-xs absolute left-xxs top-xxs rounded-sm">
         <div className="text-sm">{name}</div>
         <div className="text-sm text-primary">€{price}</div>
       </div>

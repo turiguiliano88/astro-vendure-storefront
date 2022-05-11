@@ -1,9 +1,11 @@
-const gqlShopURL = import.meta.env.PUBLIC_SHOPAPI;
+// const gqlShopURL = import.meta.env.PUBLIC_SHOPAPI;
+const gqlShopURL = "http://localhost:3000/shop-api";
 
-export const createQuery = async ({ query, variables, clientToken }) => {
-  console.log("first token inititate server", clientToken);
+// const cookie = Astro.request.headers.get("cookie");
+
+export const createQuery = async ({ query, variables }, cookie) => {
   let headers = { "Content-Type": "application/json" };
-  if (clientToken) headers.Authorization = `Bearer ${clientToken}`;
+  if (cookie) headers.Cookie = cookie;
   const response = await fetch(gqlShopURL, {
     method: "POST",
     headers,

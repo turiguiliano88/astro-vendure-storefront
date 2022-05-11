@@ -1,10 +1,13 @@
 export default function Input(props) {
-  const disabledStyle = props.disabled ? "bg-neutral-200" : "bg-transparent";
+  let backgroundStyle = props.disabled ? "bg-neutral-200" : "bg-transparent";
+  backgroundStyle = props.backgroundStyle
+    ? props.backgroundStyle
+    : backgroundStyle;
   return (
     <div className="text-neutral-800 flex flex-col grow">
       {props.label && <div className="mb-xxs">{props.label}</div>}
       <div
-        className={`flex border-neutral-200 border-2 items-center rounded-sm px-sm py-xs focus-within:outline-none focus-within:border-primary ${disabledStyle}`}
+        className={`flex border-neutral-200 border-2 items-center rounded-sm px-sm py-xs focus-within:outline-none focus-within:border-primary ${backgroundStyle}`}
       >
         <input
           required={props.required}

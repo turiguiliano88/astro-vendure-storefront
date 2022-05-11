@@ -1,45 +1,16 @@
 import Nav from "../components/Nav";
 import Checkout from "../components/checkout";
 import { useState, useEffect } from "react";
-import { getActiveCustomer, getActiveOrder } from "../api/shop";
+import { getActiveCustomer, getActiveOrder } from "../api/client";
 
-export default function App({ path }) {
-  const [customer, setCustomer] = useState(null);
-  const [order, setOrder] = useState(null);
-  console.log("customer", customer);
+export default function App({ order, customerName }) {
+  const [localOrder, setOrder] = useState(order);
 
-  useEffect(() => {
-    const fetchCustomer = async () => {
-      const data = await getActiveCustomer();
-      if (data.activeCustomer?.id !== customer) {
-        setCustomer(data.activeCustomer);
-        // localStorage.customer = JSON.stringify(data.activeCustomer);
-      }
-    };
-
-    const fetchOrder = async () => {
-      const data = await getActiveOrder();
-      if (data.activeOrder?.id !== order?.id) {
-        setOrder(data.activeOrder);
-        // localStorage.order = JSON.stringify(data.activeOrder);
-      }
-    };
-    fetchCustomer();
-    fetchOrder();
-  }, []);
-  console.log("href", path);
   return (
     <div>
-      <Nav
-        customerName={
-          customer &&
-          customer.firstName &&
-          `${customer.firstName} ${customer.lastName}`
-        }
-        totalQuantity={order?.totalQuantity}
-      />
+      <Nav customerName={customerName} totalQuantity={order?.totalQuantity} />
       <div className="max-w-7xl my-lg mx-auto">
-        <Checkout order={order} setOrder={setOrder} />
+        <Checkout order={localOrder} />
       </div>
     </div>
   );

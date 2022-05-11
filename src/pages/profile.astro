@@ -1,8 +1,24 @@
 ---
 import Base from "../layouts/base.astro";
-import App from '../profile-page'
+import App from '../profile-page';
+import { getActiveCustomer, getActiveOrder } from "../api/server";
+
+
+const cookie = Astro.request.headers.get('cookie');
+console.log('cookie', cookie);
+let totalQuantity, customer;
+if (cookie) {
+	totalQuantity = (await getActiveOrder(cookie)).activeOrder?.totalQuantity;
+	console.log('total quantity', totalQuantity)
+	const activeCustomer = (await getActiveCustomer(cookie)).activeCustomer;
+    console.log('acitve customer', activeCustomer); 
+	if (activeCustomer) customer = activeCustomer;
+}
+if (!cookie || !customer) {
+    return Astro.redirect('/login');
+}
 ---
 
 <Base>
-<App client:load />
+<App client:load customer={customer} totalQuantity={totalQuantity} />
 </Base>

@@ -41,6 +41,7 @@ module.exports = {
         neutral: colors.neutral,
       },
       spacing: {
+        sm: "16px",
         xs: "8px",
         xxs: "4px",
       },

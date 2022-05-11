@@ -12,7 +12,7 @@ import { useState } from "react";
 import { addItemToOrder, getActiveOrder } from "../api/shop";
 // import { state } from "../store";
 
-export default function ProductCard({ product, setOrder }) {
+export default function ProductCard({ product, setOrderQuantity }) {
   const [currentVariant, setCurrentVariant] = useState(product.variants[0]);
   const [quantity, setQuantity] = useState(1);
   // onMount(() => {
@@ -36,7 +36,7 @@ export default function ProductCard({ product, setOrder }) {
       quantity: Number(quantity),
     });
     console.log("data ", data);
-    setOrder(data.addItemToOrder);
+    setOrderQuantity(data.addItemToOrder?.totalQuantity);
   };
   return (
     <div className="flex p-sm flex-wrap md:flex-nowrap">

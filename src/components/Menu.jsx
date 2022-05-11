@@ -7,7 +7,7 @@ export default function Menu(props) {
   const [active, setActive] = useState("Order");
   console.log("tabs", props.tabs);
   return (
-    <div className="m-sm bg-white">
+    <div className="m-sm bg-white flex md:block">
       {props.tabs.map((item, index) => (
         <a href={item.href} key={index}>
           <div

@@ -3,11 +3,11 @@ import Base from '../layouts/base.astro';
 import Nav from '../components/Nav'
 import { CardTitle, CardContent, Card } from '../components/ui/Card';
 import ItemCard from '../components/ItemCard';
-import { getProducts, getActiveCustomer } from '../api/server';
+import { getProducts, getActiveCustomer, getActiveOrder } from '../api/server';
 // import HomePage from '../components/HomePage'
 import App from '../home-page'
 
-const data = await getProducts();
+const data = await getProducts(10);
 const products = data.products;
 // const _products = data.products;
 // const {products} = Astro.props;
@@ -15,21 +15,50 @@ const products = data.products;
 // const token = url.searchParams.get('auth_token');
 // console.log()
 // console.log('cookie', Astro.request.headers.get('cookie'))
+// console.log('header', Astro.request.headers)
+const cookie = Astro.request.headers.get('cookie');
+console.log('cookie', cookie);
+let totalQuantity, customerName;
+if (cookie) {
+	totalQuantity = (await getActiveOrder(cookie)).activeOrder?.totalQuantity;
+	console.log('total quantity', totalQuantity)
+	const activeCustomer = (await getActiveCustomer(cookie)).activeCustomer;
+	if (activeCustomer) customerName = activeCustomer?.firstName + ' ' + activeCustomer?.lastName;
+}
 
+console.log('order', totalQuantity, 'customer', customerName)
+// const response = await fetch('http://localhost:3000/shop-api', {
+//     method:'POST',
+//     headers: {'Content-Type':'application/json', 'Cookie' : Astro.request.headers.get('cookie')},
+//     body: JSON.stringify({
+//       query: `
+//         query {
+// 		activeCustomer {
+// 			lastName
+// 			firstName
+// 			emailAddress
+// 			user {
+// 			id
+// 			}
+// 		}
+// 		}`,
+//     }),
+//   })
 
+// const json = await response.json();
+// console.log('json', json);
 
 //   console.log('response', response)
 // const customer = (await getActiveCustomer()).activeCustomer;
-let customerName;
 // if (customer) {
 // 	customerName = `${customer?.firstName} ${customer?.lastName}`
 // }
 ---
 
 <Base title="Home">
-<App client:load products={products} />
+<!-- <App client:load products={products} /> -->
 <!-- <HomePage client:load products={products} /> -->
-<!-- <Nav client:load customerName={customerName} />
+<Nav client:load customerName={customerName} totalQuantity={totalQuantity} />
 <div class="max-w-7xl my-lg mx-auto">
 	<Card>
 	<CardTitle>Our offers</CardTitle>
@@ -37,7 +66,7 @@ let customerName;
 		<div class="flex flex-wrap">
 		{products.items?.map((item) => {
 			return (
-			<div class="w-1/2 md:w-1/3 xl:w-1/4">
+			<div class="w-1/2 md:w-1/3 xl:w-1/4 p-xxs md:p-xs">
 				<ItemCard
 				img_url={item.featuredAsset.preview}
 				path={`product/${item.slug}`}
@@ -50,5 +79,5 @@ let customerName;
 		</div>
 	</CardContent>
 	</Card>
-</div> -->
+</div>
 </Base>

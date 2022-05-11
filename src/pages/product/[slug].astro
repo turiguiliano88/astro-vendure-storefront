@@ -1,11 +1,11 @@
 ---
 import Base from '../../layouts/base.astro';
-import { getProducts, getActiveOrder } from '../../api/shop';
+import { getProducts, getActiveOrder, getActiveCustomer } from '../../api/server';
 // import App from '../../components/App';
 import ProductPage from '../../product-page/index';
 
 export async function getStaticPaths() {
-    const data = await getProducts();
+    const data = await getProducts(100);
     return data.products.items.map(item => {
         return {
             params: {
@@ -19,6 +19,13 @@ export async function getStaticPaths() {
 
 }
 
+const cookie = Astro.request.headers.get('cookie');
+let totalQuantity, customerName;
+if (cookie) {
+	totalQuantity = (await getActiveOrder(cookie)).activeOrder?.totalQuantity;
+	const activeCustomer = (await getActiveCustomer(cookie)).activeCustomer;
+	if (activeCustomer) customerName = activeCustomer?.firstName + ' ' + activeCustomer?.lastName;
+}
 const {slug} = Astro.params;
 const {product} = Astro.props;
 
@@ -30,5 +37,5 @@ const {product} = Astro.props;
 ---
 
 <Base title="product">
-<ProductPage client:load product={product} />
+<ProductPage client:load product={product} customerName={customerName} totalQuantity={totalQuantity} />
 </Base>

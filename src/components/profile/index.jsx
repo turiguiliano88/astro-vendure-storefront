@@ -19,6 +19,7 @@ export default function Profile({ customer, setCustomer, path }) {
   // useEffect(() => {
   //   fetchData();
   // }, [fetchData]);
+  console.log("customer", customer);
   const options = ["Order", "Address", "Account"].map((item) => {
     return {
       name: item,
@@ -32,11 +33,15 @@ export default function Profile({ customer, setCustomer, path }) {
   return (
     <>
       {customer ? (
-        <div className="flex">
-          <div className="w-[300px]">
+        <div className="flex flex-wrap">
+          <div className="w-full md:w-1/3">
             <ProfileMenu activeTab={activeTab} tabs={options} />
           </div>
-          {activeTab === "Order" && <ProfileOrder />}
+          {activeTab === "Order" && (
+            <div className="grow">
+              <ProfileOrder orders={customer?.orders?.items} />
+            </div>
+          )}
           {activeTab === "Account" && (
             <ProfileAccount
               firstName={customer.firstName}

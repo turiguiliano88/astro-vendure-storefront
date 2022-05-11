@@ -27,7 +27,8 @@ export default function Login({ setCustomer }) {
         });
         console.log(id);
         const data = await getActiveCustomer();
-        setCustomer(data.activeCustomer);
+        // setCustomer(data.activeCustomer);
+        window.location.href = "/";
       }}
     >
       <Card>

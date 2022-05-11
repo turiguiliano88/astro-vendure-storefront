@@ -2,44 +2,40 @@ import Nav from "../components/Nav";
 import ProductCard from "../components/ProductCard";
 import { useEffect, useState, useCallback } from "react";
 // import { getActiveCustomer } from "../api/client";
-import { getActiveOrder, getActiveCustomer } from "../api/shop";
+// import { getActiveOrder, getActiveCustomer } from "../api/client";
 
-export default function App({ product }) {
-  const [customer, setCustomer] = useState(null);
-  const [order, setOrder] = useState(null);
-  console.log("customer", customer);
+export default function App({ product, totalQuantity, customerName }) {
+  // const [customer, setCustomer] = useState(
+  //   JSON.parse(localStorage.customer || "{}")
+  // );
+  // const [order, setOrder] = useState({});
+  // console.log("customer", customer);
 
-  useEffect(() => {
-    const fetchCustomer = async () => {
-      const data = await getActiveCustomer();
-      if (data.activeCustomer?.id !== customer) {
-        setCustomer(data.activeCustomer);
-        // localStorage.customer = JSON.stringify(data.activeCustomer);
-      }
-    };
+  // useEffect(() => {
+  //   const fetchCustomer = async () => {
+  //     const data = await getActiveCustomer();
+  //     if (data.activeCustomer?.id !== customer) {
+  //       setCustomer(data.activeCustomer);
+  //       // localStorage.customer = JSON.stringify(data.activeCustomer);
+  //     }
+  //   };
 
-    const fetchOrder = async () => {
-      const data = await getActiveOrder();
-      if (data.activeOrder?.id !== order?.id) {
-        setOrder(data.activeOrder);
-        // localStorage.order = JSON.stringify(data.activeOrder);
-      }
-    };
-    fetchCustomer();
-    fetchOrder();
-  }, []);
+  //   const fetchOrder = async () => {
+  //     const data = await getActiveOrder();
+  //     if (data.activeOrder?.id !== order?.id) {
+  //       setOrder(data.activeOrder);
+  //       // localStorage.order = JSON.stringify(data.activeOrder);
+  //     }
+  //   };
+  //   fetchCustomer();
+  //   fetchOrder();
+  // }, []);
+  const [orderQuantity, setOrderQuantity] = useState(totalQuantity);
   return (
     <div>
-      <Nav
-        customerName={
-          customer &&
-          customer.firstName &&
-          `${customer.firstName} ${customer.lastName}`
-        }
-        totalQuantity={order?.totalQuantity}
-      />
+      <Nav customerName={customerName} totalQuantity={orderQuantity} />
       <div className="max-w-7xl my-lg mx-auto">
-        <ProductCard product={product} setOrder={setOrder} />
+        <ProductCard product={product} setOrderQuantity={setOrderQuantity} />
       </div>
     </div>
   );

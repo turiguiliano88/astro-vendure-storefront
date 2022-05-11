@@ -264,3 +264,25 @@ export async function transitionOrderToState(state) {
     `,
   });
 }
+
+export async function search(term) {
+  return await createQuery({
+    query: `
+    query {
+      search(input: {
+        term: "${term}",
+        take: 10
+      }) {
+        totalItems
+        items {
+          productAsset {
+            preview
+          }
+          productName
+          slug
+        }
+      }
+    }
+    `,
+  });
+}

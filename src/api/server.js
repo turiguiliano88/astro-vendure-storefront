@@ -28,9 +28,10 @@ const OrderSchema = `
   }
 `;
 
-export async function addItemToOrder({ productVariantId, quantity }) {
-  return await createQuery({
-    query: `
+export async function addItemToOrder({ productVariantId, quantity }, cookie) {
+  return await createQuery(
+    {
+      query: `
       mutation($productVariantId: ID!, $quantity: Int!){
         addItemToOrder(productVariantId: $productVariantId, quantity: $quantity) {
           ... on Order {
@@ -38,36 +39,44 @@ export async function addItemToOrder({ productVariantId, quantity }) {
           }
         }
       }`,
-    variables: {
-      productVariantId,
-      quantity,
+      variables: {
+        productVariantId,
+        quantity,
+      },
     },
-  });
+    cookie
+  );
 }
 
-export async function getActiveOrder(clientToken) {
-  return await createQuery({
-    query: `
+export async function getActiveOrder(cookie) {
+  return await createQuery(
+    {
+      query: `
       query {
         activeOrder {
           ${OrderSchema}
         }
       }`,
-    clientToken: clientToken,
-  });
+    },
+    cookie
+  );
 }
 
-export async function getCurrentUser(id) {
-  return await createQuery({
-    query: `
+export async function getCurrentUser(cookie) {
+  return await createQuery(
+    {
+      query: `
     
     `,
-  });
+    },
+    cookie
+  );
 }
 
-export async function getActiveCustomer(clientToken) {
-  return await createQuery({
-    query: `
+export async function getActiveCustomer(cookie) {
+  return await createQuery(
+    {
+      query: `
     query {
       activeCustomer {
         lastName
@@ -92,26 +101,32 @@ export async function getActiveCustomer(clientToken) {
         }
       }
     }`,
-    clientToken,
-  });
+    },
+    cookie
+  );
 }
 
-export async function getMe() {
-  return await createQuery({
-    query: `
+export async function getMe(cookie) {
+  return await createQuery(
+    {
+      query: `
     query {
       me {
         id
       }  
     }`,
-  });
+    },
+    cookie
+  );
 }
 
-export async function getProducts() {
+export async function getProducts(take) {
   return await createQuery({
     query: `
         query {
-          products {
+          products(options: {
+            take: ${take}
+          }) {
             totalItems
             items {
               id
@@ -188,9 +203,10 @@ export async function getEligiblePaymentMethods() {
   });
 }
 
-export async function setOrderShippingMethod(id) {
-  return await createQuery({
-    query: `
+export async function setOrderShippingMethod(id, cookie) {
+  return await createQuery(
+    {
+      query: `
     mutation {
       setOrderShippingMethod(shippingMethodId: ${id}) {
         ... on Order {
@@ -198,10 +214,12 @@ export async function setOrderShippingMethod(id) {
         }
       }
     }`,
-  });
+    },
+    cookie
+  );
 }
 
-export async function addPaymentToOrder(method, metadata) {
+export async function addPaymentToOrder(method, metadata, cookie) {
   return await createQuery({
     query: `
     mutation($metadata: JSON!, $method: String!) {
@@ -227,10 +245,12 @@ export async function setOrderShippingAddress(
   streetLine2,
   city,
   province,
-  phoneNumber
+  phoneNumber,
+  cookie
 ) {
-  return await createQuery({
-    query: `
+  return await createQuery(
+    {
+      query: `
     mutation {
       setOrderShippingAddress(input: {
         fullName: "${fullName}",
@@ -246,12 +266,15 @@ export async function setOrderShippingAddress(
         }
       }
     }`,
-  });
+    },
+    cookie
+  );
 }
 
-export async function transitionOrderToState(state) {
-  return await createQuery({
-    query: `
+export async function transitionOrderToState(state, cookie) {
+  return await createQuery(
+    {
+      query: `
     mutation {
       transitionOrderToState(state: "${state}") {
         ... on OrderStateTransitionError {
@@ -263,5 +286,7 @@ export async function transitionOrderToState(state) {
       }
     }
     `,
-  });
+    },
+    cookie
+  );
 }

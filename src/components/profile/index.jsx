@@ -3,22 +3,12 @@ import ProfileOrder from "./Order";
 import ProfileAccount from "./Account";
 import ProfileAddress from "./Address";
 import { useState, useCallback, useEffect } from "react";
-// import { useRecoilState } from "recoil";
-import { customerState } from "../../store";
-import { getActiveCustomer } from "../../api/shop";
-import Button from "../ui/Button";
-import Login from "../form/Login";
-export default function Profile({ customer, setCustomer, path }) {
+import Nav from "../Nav";
+// import Login from "../login/Login";
+export default function Profile({ customer, totalQuantity }) {
   const [activeTab, setActiveTab] = useState("Order");
-  // const [customer, setCustomer] = useRecoilState(customerState);
-  // const fetchData = useCallback(async () => {
-  //   const data = await getActiveCustomer();
+  const [localCustomer, setCustomer] = useState(customer);
 
-  //   setCustomer(data.activeCustomer);
-  // }, []);
-  // useEffect(() => {
-  //   fetchData();
-  // }, [fetchData]);
   console.log("customer", customer);
   const options = ["Order", "Address", "Account"].map((item) => {
     return {
@@ -27,12 +17,15 @@ export default function Profile({ customer, setCustomer, path }) {
       onClick: () => {
         setActiveTab(item);
       },
-      // href: "/profile/" + item.toLowerCase(),
     };
   });
   return (
-    <>
-      {customer ? (
+    <div>
+      <Nav
+        customerName={`${localCustomer?.firstName} ${localCustomer?.lastName}`}
+        totalQuantity={totalQuantity}
+      />
+      <div className="max-w-7xl my-lg mx-auto">
         <div className="flex flex-wrap">
           <div className="w-full md:w-1/3">
             <ProfileMenu activeTab={activeTab} tabs={options} />
@@ -56,11 +49,7 @@ export default function Profile({ customer, setCustomer, path }) {
             )}
           </div>
         </div>
-      ) : (
-        <div className="max-w-sm my-sm mx-auto">
-          <Login setCustomer={setCustomer} />
-        </div>
-      )}
-    </>
+      </div>
+    </div>
   );
 }

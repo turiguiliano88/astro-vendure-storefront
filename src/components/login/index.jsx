@@ -1,5 +1,5 @@
-import Nav from "../components/Nav";
-import Login from "../components/form/Login";
+import Nav from "../Nav";
+import Login from "./Login";
 export default function App({ path }) {
   console.log("href", path);
   return (

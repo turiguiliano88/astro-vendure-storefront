@@ -1,16 +1,10 @@
-import Disclosure from "./ui/Disclosure";
-import Button from "./ui/Button";
-import ShoppingBagIcon from "./icon/ShoppingBag";
-import Input from "./ui/Input";
-import Select from "./ui/Select";
+import Disclosure from "../ui/Disclosure";
+import Button from "../ui/Button";
+import ShoppingBagIcon from "../icon/ShoppingBag";
+import Input from "../ui/Input";
+import Select from "../ui/Select";
 import { useState } from "react";
-// import { For, Show, onMount, createSignal } from "solid-js";
-// import Splide from "@splidejs/splide";
-// import { Splide, SplideSlide } from "@splidejs/react-splide";
-// import pkg from "@splidejs/react-splide";
-// const { Splide2, SplideSlide } = pkg;
-import { addItemToOrder, getActiveOrder } from "../api/client";
-// import { state } from "../store";
+import { addItemToOrder, getActiveOrder } from "../../api/client";
 
 export default function ProductCard({
   product,
@@ -20,22 +14,8 @@ export default function ProductCard({
   const [currentVariant, setCurrentVariant] = useState(product.variants[0]);
   const [quantity, setQuantity] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
-  // onMount(() => {
-  //   new Splide(".splide").mount();
-  // });
 
   const addToBag = async () => {
-    // state.add
-    // localStorage.setItem(
-    //   "auth_token",
-    //   "ff7c33f7f794de013b8451c6a6c6701caa5eea74d1aa3228592176e3b8ba0737"
-    // );
-    // state.authToken =
-    //   "ff7c33f7f794de013b8451c6a6c6701caa5eea74d1aa3228592176e3b8ba0737";
-    // await state.addItem({
-    //   productVariantId: currentVariant().id,
-    //   quantity: noOfItems(),
-    // });
     const data = await addItemToOrder({
       productVariantId: currentVariant.id,
       quantity: Number(quantity),

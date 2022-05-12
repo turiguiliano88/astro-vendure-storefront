@@ -2,7 +2,7 @@
 import Base from '../../layouts/base.astro';
 import { getProducts, getActiveOrder, getActiveCustomer } from '../../api/server';
 // import App from '../../components/App';
-import ProductPage from '../../product-page/index';
+import App from '../../components/product';
 
 export async function getStaticPaths() {
     const data = await getProducts(100);
@@ -37,5 +37,5 @@ const {product} = Astro.props;
 ---
 
 <Base title="product">
-<ProductPage client:load product={product} customerName={customerName} totalQuantity={totalQuantity} />
+<App client:load product={product} customerName={customerName} totalQuantity={totalQuantity} />
 </Base>

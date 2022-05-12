@@ -44,6 +44,7 @@ module.exports = {
         sm: "16px",
         xs: "8px",
         xxs: "4px",
+        40: "160px",
       },
       flexShrink: {
         2: 2,

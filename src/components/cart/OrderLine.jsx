@@ -7,9 +7,9 @@ export default function OrderLine({ line, quantities, setOrder }) {
   // const quantit = [1, 2, 3, 4, 5, 6, 7];
   return (
     <div className="flex justify-center text-neutral-600">
-      <div className="w-1/3 flex p-xs">
+      <div className="w-1/3 flex p-xs justify-center">
         <img
-          className="object-contain w-full"
+          className="object-contain w-full max-h-40"
           src={`${line.featuredAsset.preview}?preset=thumb`}
         />
       </div>

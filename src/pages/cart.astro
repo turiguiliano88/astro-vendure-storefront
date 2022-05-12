@@ -1,6 +1,6 @@
 ---
 import Base from "../layouts/base.astro";
-import App from '../cart-page'
+import App from '../components/cart'
 import { getActiveCustomer, getActiveOrder } from "../api/server";
 
 const cookie = Astro.request.headers.get('cookie');

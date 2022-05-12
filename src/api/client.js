@@ -1,32 +1,5 @@
 import { createQuery } from "../utils/client/gqlClient";
-
-const OrderSchema = `
-  id
-  state
-  createdAt
-  code
-  totalQuantity
-  shipping
-  subTotal
-  total
-  lines {
-    id
-    featuredAsset {
-      preview
-    }
-    productVariant {
-      name
-      product {
-        name
-      }
-      featuredAsset {
-        preview
-      }
-    }
-    quantity
-    linePrice
-  }
-`;
+import { OrderSchema, CustomerSchema } from "./schema";
 
 export async function addItemToOrder({ productVariantId, quantity }) {
   return await createQuery({
@@ -45,7 +18,7 @@ export async function addItemToOrder({ productVariantId, quantity }) {
   });
 }
 
-export async function getActiveOrder(clientToken) {
+export async function getActiveOrder() {
   return await createQuery({
     query: `
       query {
@@ -53,7 +26,6 @@ export async function getActiveOrder(clientToken) {
           ${OrderSchema}
         }
       }`,
-    clientToken: clientToken,
   });
 }
 
@@ -70,27 +42,7 @@ export async function getActiveCustomer() {
     query: `
     query {
       activeCustomer {
-        lastName
-        firstName
-        emailAddress
-        phoneNumber
-        addresses {
-          fullName
-          streetLine1
-          streetLine2
-          city
-          province
-          phoneNumber
-          defaultShippingAddress
-        }
-        user {
-          id
-        }
-        orders {
-          items {
-            ${OrderSchema}
-          }
-        }
+        ${CustomerSchema}
       }
     }`,
   });
@@ -138,7 +90,7 @@ export async function getProducts() {
   });
 }
 
-export async function login({ username, password, rememberMe }) {
+export async function login(username, password, rememberMe) {
   console.log("argument", username, password, rememberMe);
   return await createQuery({
     query: `
@@ -329,6 +281,68 @@ export async function removeOrderLine(orderLineId) {
         ... on Order {
           ${OrderSchema}
         }
+      }
+    }
+    `,
+  });
+}
+
+export async function setCustomerForOrder(
+  firstName,
+  lastName,
+  phoneNumber,
+  emailAddress
+) {
+  return await createQuery({
+    query: `
+    mutation {
+      setCustomerForOrder(input: {
+        firstName: "${firstName}",
+        lastName: "${lastName}",
+        phoneNumber: "${phoneNumber}",
+        emailAddress: "${emailAddress}"
+      }) {
+        ... on Order {
+          ${OrderSchema}
+        }
+      }
+    }
+    `,
+  });
+}
+
+export async function registerCustomerAccount(
+  firstName,
+  lastName,
+  phoneNumber,
+  emailAddress,
+  password
+) {
+  return await createQuery({
+    query: `
+    mutation {
+      registerCustomerAccount(input: {
+        firstName: "${firstName}",
+        lastName: "${lastName}",
+        phoneNumber: "${phoneNumber}",
+        emailAddress: "${emailAddress}",
+        password: "${password}"
+      }) {
+        ... on Success {
+          success
+        }
+      }
+    }
+    `,
+  });
+}
+
+export async function logout() {
+  return await createQuery({
+    query: `
+    mutation {
+      logout {
+        success
       }
     }
     `,

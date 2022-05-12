@@ -5,7 +5,6 @@ import { search } from "../api/client";
 export default function ElasticSearch() {
   const [items, setItems] = useState([]);
   const [term, setTerm] = useState("");
-  console.log("running");
 
   useEffect(() => {
     const timeOutId = setTimeout(async () => {
@@ -32,7 +31,6 @@ export default function ElasticSearch() {
               <SearchIcon className="w-4 h-4" />
             </div>
           }
-          // backgroundStyle="bg-white"
           type="text"
           onChange={(event) => setTerm(event.target.value)}
         />
@@ -48,7 +46,6 @@ export default function ElasticSearch() {
           </div>
         )}
       </div>
-      {/* <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-neutral-800/80 z-10"></div> */}
     </>
   );
 }

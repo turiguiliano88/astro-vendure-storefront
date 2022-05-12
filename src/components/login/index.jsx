@@ -1,7 +1,6 @@
 import Nav from "../Nav";
 import Login from "./Login";
-export default function App({ path }) {
-  console.log("href", path);
+export default function App() {
   return (
     <div>
       <Nav />

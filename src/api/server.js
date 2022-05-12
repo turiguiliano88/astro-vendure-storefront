@@ -1,32 +1,5 @@
 import { createQuery } from "../utils/server/gqlClient";
-
-const OrderSchema = `
-  id
-  state
-  createdAt
-  code
-  totalQuantity
-  shipping
-  subTotal
-  total
-  lines {
-    id
-    featuredAsset {
-      preview
-    }
-    productVariant {
-      name
-      product {
-        name
-      }
-      featuredAsset {
-        preview
-      }
-    }
-    quantity
-    linePrice
-  }
-`;
+import { OrderSchema, CustomerSchema } from "./schema";
 
 export async function addItemToOrder({ productVariantId, quantity }, cookie) {
   return await createQuery(
@@ -77,31 +50,11 @@ export async function getActiveCustomer(cookie) {
   return await createQuery(
     {
       query: `
-    query {
-      activeCustomer {
-        lastName
-        firstName
-        emailAddress
-        phoneNumber
-        addresses {
-          fullName
-          streetLine1
-          streetLine2
-          city
-          province
-          phoneNumber
-          defaultShippingAddress
-        }
-        user {
-          id
-        }
-        orders {
-          items {
-            ${OrderSchema}
+        query {
+          activeCustomer {
+            ${CustomerSchema}
           }
-        }
-      }
-    }`,
+        }`,
     },
     cookie
   );
@@ -111,11 +64,11 @@ export async function getMe(cookie) {
   return await createQuery(
     {
       query: `
-    query {
-      me {
-        id
-      }  
-    }`,
+        query {
+          me {
+            id
+          }  
+        }`,
     },
     cookie
   );
@@ -220,7 +173,7 @@ export async function setOrderShippingMethod(id, cookie) {
   );
 }
 
-export async function addPaymentToOrder(method, metadata, cookie) {
+export async function addPaymentToOrder(method, metadata) {
   return await createQuery({
     query: `
     mutation($metadata: JSON!, $method: String!) {

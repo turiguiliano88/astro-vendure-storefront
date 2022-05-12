@@ -1,6 +1,10 @@
 import Button from "../ui/Button";
 import { useState, useEffect } from "react";
-import { addPaymentToOrder, getEligiblePaymentMethods } from "../../api/shop";
+import {
+  addPaymentToOrder,
+  getEligiblePaymentMethods,
+  transitionOrderToState,
+} from "../../api/client";
 export default function Payment({ setOrder, eligiblePaymentMethods }) {
   const [paymentMethod, setPaymentMethod] = useState({});
   const [paymentMethods, setPaymentMethods] = useState(eligiblePaymentMethods);
@@ -46,7 +50,8 @@ export default function Payment({ setOrder, eligiblePaymentMethods }) {
           type="neutral"
           onClick={async () => {
             setOrder(
-              await transitionOrderToState("AddingItems").transitionOrderToState
+              (await transitionOrderToState("AddingItems"))
+                .transitionOrderToState
             );
           }}
         >

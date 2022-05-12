@@ -5,7 +5,7 @@ import Check from "../ui/Check";
 // import { createClient } from "../../utils/client";
 // import { onMount, createSignal } from "solid-js";
 import { useEffect, useState } from "react";
-import { login, getActiveCustomer } from "../../api/shop";
+import { login, getActiveCustomer } from "../../api/client";
 // import Link from "next/link";
 // import { useState } from "react";
 // import { state } from "../../store";
@@ -20,13 +20,9 @@ export default function Login({ setCustomer }) {
       onSubmit={async (event) => {
         event.preventDefault();
         // alert("submit");
-        const id = await login({
-          username: email,
-          password: password,
-          rememberMe: rememberMe,
-        });
+        const id = await login(email, password, rememberMe);
         console.log(id);
-        const data = await getActiveCustomer();
+        // const data = await getActiveCustomer();
         // setCustomer(data.activeCustomer);
         window.location.href = "/";
       }}

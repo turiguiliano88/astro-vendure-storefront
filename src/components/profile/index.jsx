@@ -2,8 +2,10 @@ import ProfileMenu from "../Menu";
 import ProfileOrder from "./Order";
 import ProfileAccount from "./Account";
 import ProfileAddress from "./Address";
+import Button from "../ui/Button";
 import { useState, useCallback, useEffect } from "react";
 import Nav from "../Nav";
+import { logout } from "../../api/client";
 // import Login from "../login/Login";
 export default function Profile({ customer, totalQuantity }) {
   const [activeTab, setActiveTab] = useState("Order");
@@ -25,10 +27,21 @@ export default function Profile({ customer, totalQuantity }) {
         customerName={`${localCustomer?.firstName} ${localCustomer?.lastName}`}
         totalQuantity={totalQuantity}
       />
-      <div className="max-w-7xl my-lg mx-auto">
+      <div className="max-w-7xl mx-auto">
         <div className="flex flex-wrap">
           <div className="w-full md:w-1/3">
             <ProfileMenu activeTab={activeTab} tabs={options} />
+            <div className="p-sm">
+              <Button
+                type="neutral"
+                onClick={async () => {
+                  await logout();
+                  window.location.href = "/";
+                }}
+              >
+                Logout
+              </Button>
+            </div>
           </div>
           <div className="grow">
             {activeTab === "Order" && (

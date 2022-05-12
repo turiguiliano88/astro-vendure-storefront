@@ -6,20 +6,19 @@ import CustomerDetail from "./CustomerDetail";
 import Nav from "../Nav";
 // import { useState, useEffect } from "react";
 import { useState, useEffect } from "react";
-// import { getActiveCustomer, getActiveOrder } from "../../api/shop";
 
 export default function App({
   order,
   eligiblePaymentMethods,
   eligibleShippingMethods,
   customer,
-  isLoggedIn,
 }) {
   const [localOrder, setOrder] = useState(order);
+  // const isLoggedIn = customer ? true : false;
   return (
     <div className="">
       <Nav
-        customerName={customer?.firstName}
+        customerName={customer && `${customer?.firstName} ${customer.lastName}`}
         totalQuantity={localOrder?.totalQuantity}
       />
       <div className="max-w-5xl my-lg mx-auto">
@@ -27,8 +26,8 @@ export default function App({
           <CardTitle>Checkout</CardTitle>
           <CardContent>
             <div className="flex flex-wrap">
-              {isLoggedIn ? (
-                <div>
+              {order.customer ? (
+                <>
                   {localOrder?.state === "AddingItems" && (
                     <Shipping
                       setOrder={setOrder}
@@ -57,9 +56,9 @@ export default function App({
                       </div>
                     </div>
                   )}
-                </div>
+                </>
               ) : (
-                <CustomerDetail />
+                <CustomerDetail setOrder={setOrder} />
               )}
               {/* <div className="bg-neutral-200 p-lg ml-sm">
               <OrderSummary order={order} />

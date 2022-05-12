@@ -6,7 +6,7 @@ import {
   setOrderShippingMethod,
   setOrderShippingAddress,
   transitionOrderToState,
-} from "../../api/shop";
+} from "../../api/client";
 
 export default function Shipping({ setOrder, eligibleShippingMethods }) {
   const [shippingMethod, setShippingMethod] = useState(0);
@@ -47,6 +47,7 @@ export default function Shipping({ setOrder, eligibleShippingMethods }) {
         // );
         const data = await transitionOrderToState("ArrangingPayment");
         console.log("transition", data);
+        setOrder(data.transitionOrderToState);
         // .transitionOrderToState
       }}
     >

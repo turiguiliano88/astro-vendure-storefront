@@ -34,8 +34,8 @@ export default function OrderLine({ line, quantities, setOrder }) {
                       Number(line.id),
                       Number(event.target.value)
                     );
-                    console.log("change ", data);
-                    setOrder(data);
+                    console.log("change ", data.adjustOrderLine);
+                    setOrder(data.adjustOrderLine);
                   }}
                 />
                 {/* <div className="">
@@ -44,7 +44,7 @@ export default function OrderLine({ line, quantities, setOrder }) {
                 <div
                   className="ml-xs cursor-pointer"
                   onClick={async () => {
-                    setOrder(await removeOrderLine(line.id).removeOrderLine);
+                    setOrder((await removeOrderLine(line.id)).removeOrderLine);
                   }}
                 >
                   <TrashIcon className="w-4 h-4" />

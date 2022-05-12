@@ -12,7 +12,11 @@ import { useState } from "react";
 import { addItemToOrder, getActiveOrder } from "../api/client";
 // import { state } from "../store";
 
-export default function ProductCard({ product, setOrderQuantity }) {
+export default function ProductCard({
+  product,
+  setOrderQuantity,
+  setShowMiniCart,
+}) {
   const [currentVariant, setCurrentVariant] = useState(product.variants[0]);
   const [quantity, setQuantity] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
@@ -38,6 +42,7 @@ export default function ProductCard({ product, setOrderQuantity }) {
     });
     console.log("data ", data);
     setOrderQuantity(data.addItemToOrder?.totalQuantity);
+    setShowMiniCart(true);
   };
   return (
     <div className="flex p-sm flex-wrap md:flex-nowrap">
@@ -74,8 +79,8 @@ export default function ProductCard({ product, setOrderQuantity }) {
                 key={index}
                 className={
                   currentVariant?.id === item.id
-                    ? `bg-neutral-800 text-white py-xs px-sm mr-xs mb-xs inline-flex rounded-md cursor-pointer`
-                    : `bg-neutral-100 py-xs px-sm mr-xs mb-xs inline-flex rounded-md cursor-pointer`
+                    ? `bg-neutral-800 text-white py-xs px-sm mr-xs mb-xs inline-flex rounded-md`
+                    : `bg-neutral-100 py-xs px-sm mr-xs mb-xs inline-flex rounded-md cursor-pointer hover:bg-neutral-300`
                 }
                 onClick={() => setCurrentVariant(item)}
               >

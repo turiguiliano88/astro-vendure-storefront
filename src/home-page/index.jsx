@@ -11,6 +11,7 @@ export default function App({ products }) {
   const [customer, setCustomer] = useState(null);
   const [order, setOrder] = useState(null);
   const [isloading, setIsLoading] = useState(false);
+  const [showMiniCart, setShowMiniCart] = useState(true);
   console.log("customer", customer);
 
   useEffect(() => {
@@ -44,6 +45,8 @@ export default function App({ products }) {
   return (
     <div>
       <Nav
+        showMiniCart={showMiniCart}
+        setShowMiniCart={setShowMiniCart}
         customerName={
           customer &&
           customer.firstName &&

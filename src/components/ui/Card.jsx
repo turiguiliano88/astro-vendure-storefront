@@ -3,7 +3,7 @@ export const Card = (props) => {
 };
 
 export const CardContent = (props) => {
-  return <div className="flex flex-col">{props.children}</div>;
+  return <div className="">{props.children}</div>;
 };
 
 export const CardTitle = (props) => {

@@ -1,9 +1,9 @@
 import Button from "../ui/Button";
 import { useState, useEffect } from "react";
 import { addPaymentToOrder, getEligiblePaymentMethods } from "../../api/shop";
-export default function Payment({ setOrder }) {
+export default function Payment({ setOrder, eligiblePaymentMethods }) {
   const [paymentMethod, setPaymentMethod] = useState({});
-  const [paymentMethods, setPaymentMethods] = useState([]);
+  const [paymentMethods, setPaymentMethods] = useState(eligiblePaymentMethods);
 
   useEffect(() => {
     async function fetchPaymentMethods() {
@@ -17,7 +17,7 @@ export default function Payment({ setOrder }) {
       onSubmit={async (event) => {
         event.preventDefault();
         setOrder(
-          await addPaymentToOrder(paymentMethod?.code, { id: 12 })
+          (await addPaymentToOrder(paymentMethod?.code, { id: 12 }))
             .addPaymentToOrder
         );
         // if (paymentMethod) await state.set

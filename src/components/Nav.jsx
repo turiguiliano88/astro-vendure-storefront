@@ -4,8 +4,14 @@ import UserIcon from "./icon/User";
 import Button from "../components/ui/Button";
 import SearchIcon from "./icon/Search";
 import ElasticSearch from "./ElasticSearch";
+import MiniCart from "./MiniCart";
 
-export default function Nav({ totalQuantity, customerName }) {
+export default function Nav({
+  totalQuantity,
+  customerName,
+  showMiniCart,
+  setShowMiniCart,
+}) {
   return (
     <div className="m-sm">
       <div className="flex justify-between items-center">
@@ -50,12 +56,19 @@ export default function Nav({ totalQuantity, customerName }) {
           <SearchIcon className="w-5 h-5" />
         </div> */}
           <div className="relative">
-            <a href="/cart">
+            {/* <a href="/cart">
               <ShoppingBagIcon className="w-5 h-5" />
               <div className="text-white font-medium text-xs bottom-1 right-0 w-3 h-3 absolute bg-primary rounded-full flex items-center justify-center">
                 {totalQuantity}
               </div>
-            </a>
+            </a> */}
+            {/* <div className="absolute right-0 border-2 border-neutral-800 mt-xs z-50 bg-white"> */}
+            <MiniCart
+              showMiniCart={showMiniCart}
+              setShowMiniCart={setShowMiniCart}
+              totalQuantity={totalQuantity}
+            />
+            {/* </div> */}
           </div>
         </div>
       </div>

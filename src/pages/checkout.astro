@@ -2,10 +2,11 @@
 import Base from "../layouts/base.astro";
 import App from '../checkout-page';
 import { getActiveCustomer, getActiveOrder } from "../api/server";
+import {getEligiblePaymentMethods, getEligibleShippingMethods} from '../api/shop'
 
 const cookie = Astro.request.headers.get('cookie');
 console.log('cookie', cookie);
-let order, customerName;
+let order, customerName, eligiblePaymentMethods, eligibleShippingMethods;
 if (cookie) {
 	order = (await getActiveOrder(cookie)).activeOrder;
 	console.log('order checkout', order)
@@ -13,12 +14,15 @@ if (cookie) {
     console.log('acitve customer', activeCustomer); 
 	if (activeCustomer) customerName = activeCustomer?.firstName + ' ' + activeCustomer?.lastName;
 }
+	console.log('methods ', await getEligibleShippingMethods());
 if (!cookie || !order) {
     console.log('run into')
     return Astro.redirect('/');
 }
+eligiblePaymentMethods = (await getEligiblePaymentMethods()).eligiblePaymentMethods;
+eligibleShippingMethods = (await getEligibleShippingMethods()).eligibleShippingMethods;
 ---
 
 <Base>
-<App client:load order={order} customerName={customerName} />
+<App client:load order={order} customerName={customerName} eligiblePaymentMethods={eligiblePaymentMethods} eligibleShippingMethods={eligibleShippingMethods} />
 </Base>

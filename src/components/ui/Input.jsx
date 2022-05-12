@@ -11,7 +11,7 @@ export default function Input(props) {
       >
         <input
           required={props.required}
-          className="transition p-0 m-0 grow border-none focus:outline-none"
+          className="transition p-0 m-0 grow border-none focus:outline-none bg-transparent"
           type={props.type}
           onChange={props.onChange}
           onInput={props.onInput}

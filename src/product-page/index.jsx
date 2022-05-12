@@ -5,6 +5,7 @@ import { useEffect, useState, useCallback } from "react";
 // import { getActiveOrder, getActiveCustomer } from "../api/client";
 
 export default function App({ product, totalQuantity, customerName }) {
+  const [showMiniCart, setShowMiniCart] = useState(false);
   // const [customer, setCustomer] = useState(
   //   JSON.parse(localStorage.customer || "{}")
   // );
@@ -33,9 +34,18 @@ export default function App({ product, totalQuantity, customerName }) {
   const [orderQuantity, setOrderQuantity] = useState(totalQuantity);
   return (
     <div>
-      <Nav customerName={customerName} totalQuantity={orderQuantity} />
+      <Nav
+        customerName={customerName}
+        totalQuantity={orderQuantity}
+        showMiniCart={showMiniCart}
+        setShowMiniCart={setShowMiniCart}
+      />
       <div className="max-w-7xl my-lg mx-auto">
-        <ProductCard product={product} setOrderQuantity={setOrderQuantity} />
+        <ProductCard
+          product={product}
+          setOrderQuantity={setOrderQuantity}
+          setShowMiniCart={setShowMiniCart}
+        />
       </div>
     </div>
   );

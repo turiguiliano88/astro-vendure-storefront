@@ -8,13 +8,14 @@ import { getProducts, getActiveCustomer, getActiveOrder, getCollectionsShort } f
 const data = await getProducts(10);
 const products = data.products;
 
+const collections = (await getCollectionsShort()).collections;
+
 const cookie = Astro.request.headers.get('cookie');
-let totalQuantity, customerName, collections;
+let totalQuantity, customerName;
 if (cookie) {
 	totalQuantity = (await getActiveOrder(cookie)).activeOrder?.totalQuantity;
 	const activeCustomer = (await getActiveCustomer(cookie)).activeCustomer;
 	if (activeCustomer) customerName = activeCustomer?.firstName + ' ' + activeCustomer?.lastName;
-	collections = (await getCollectionsShort()).collections;
 }
 
 ---

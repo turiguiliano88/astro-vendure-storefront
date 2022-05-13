@@ -8,6 +8,7 @@
 
 This project attempts to deliever smooth e-commerce storefront experiences to customer/end user. It is powered by Vendure - headless commerce framework as backend and leveraging SSR functionalities and partial hydration on client side that Astro gives us.
 
+**Warning: It is far from ready for production 😜**
 ## Features
 
 This project supports common ecommerce flow such as ordering and managing profile.
@@ -92,7 +93,7 @@ This ensure that only proper customer/guest can see his/her private orders/info.
 
 1. Animation
 2. Addresses management
-3. Writing test
+3. Catch eror, write test
 4. ...
 
 ## Powered by

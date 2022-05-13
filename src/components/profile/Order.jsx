@@ -33,6 +33,11 @@ export default function ProfileOrder({ orders }) {
                       <OrderLine key={index} line={line} />
                     </div>
                   ))}
+                  <div className="my-sm h-[2px] bg-neutral-400" />
+                  <div className="flex justify-between p-xs font-medium">
+                    <span>Total: </span>
+                    <span>€{order.total}</span>
+                  </div>
                 </div>
               }
             />

@@ -7,11 +7,13 @@ export default function OrderLine({ line, quantities, setOrder }) {
   // const quantit = [1, 2, 3, 4, 5, 6, 7];
   return (
     <div className="flex justify-center text-neutral-600">
-      <div className="w-1/3 flex p-xs justify-center">
-        <img
-          className="object-contain w-full max-h-40"
-          src={`${line.featuredAsset.preview}?preset=thumb`}
-        />
+      <div className="w-[80px] md:w-[120px] flex p-xs justify-center">
+        <a href={`/product/${line.productVariant.product.slug}`}>
+          <img
+            className="object-contain w-full"
+            src={`${line.featuredAsset.preview}?preset=thumb`}
+          />
+        </a>
       </div>
       <div className="flex justify-between grow">
         <div className="p-xs">

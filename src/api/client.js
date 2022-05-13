@@ -331,6 +331,14 @@ export async function registerCustomerAccount(
         ... on Success {
           success
         }
+        ... on MissingPasswordError {
+          errorCode
+          message
+        }
+        ... on NativeAuthStrategyError {
+          errorCode
+          message
+        }
       }
     }
     `,

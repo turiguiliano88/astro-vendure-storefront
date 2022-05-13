@@ -22,6 +22,7 @@ export const OrderSchema = `
       name
       product {
         name
+        slug
       }
       featuredAsset {
         preview

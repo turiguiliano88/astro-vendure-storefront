@@ -55,7 +55,7 @@ export default function Login({ setCustomer }) {
           <div className="self-start">
             <Button submit>Login</Button>
           </div>
-          <div className="my-sm h-[2px] bg-gray-800" />
+          <div className="my-sm h-[2px] bg-neutral-800" />
           <div className="text-gray-500">
             <span>Don't have an account? </span>
             <a className="text-primary">Sign up</a>

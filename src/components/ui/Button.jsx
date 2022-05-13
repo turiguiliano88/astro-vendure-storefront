@@ -2,8 +2,8 @@ export default function Button(props) {
   let styleColor;
   switch (props.type) {
     case "neutral":
-      // styleColor = "bg-neutral-200 text-neutral-900 hover:ring-neutral-300";
-      styleColor = "border-2 border-neutral-800 hover:ring-neutral-400";
+      styleColor = "bg-neutral-200 text-neutral-900 hover:ring-neutral-600";
+      // styleColor = "border-2 border-neutral-800 hover:ring-neutral-400";
       break;
     case "secondary":
       styleColor = "bg-secondary text-white  hover:ring-secondary/40";

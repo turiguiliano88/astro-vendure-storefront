@@ -9,11 +9,13 @@
 This project attempts to deliever smooth e-commerce storefront experiences to customer/end user. It is powered by Vendure - headless commerce framework as backend and leveraging SSR functionalities and partial hydration on client side that Astro gives us.
 
 **Warning: It is far from ready for production 😜**
+
 ## Features
 
 This project supports common ecommerce flow such as ordering and managing profile.
 
 - Order flow:
+
   1. Add item to cart
   2. Modify cart
   3. Add shipping address
@@ -84,6 +86,17 @@ These are responsible for layout / non-state Astro component rendered at server.
 │   │   └── base.astro
 ```
 
+### Api
+
+These are responsible for api logic serving only in server or public for client.
+
+```
+├── src/
+│   ├── api/
+│   │   └── client.js
+│   │   └── server.js
+```
+
 ## SSR functionalites
 
 Every request from browser will be examined on server to see if the customer is logged in or there is any active order by checking the cookie from the request header. The server will therefore redirect to proper route.
@@ -97,15 +110,19 @@ This ensure that only proper customer/guest can see his/her private orders/info.
 4. ...
 
 ## Powered by
+
 - [Astro](https://astro.build)
 - [Vendure](https://www.vendure.io)
 - [React](https://reactjs.org)
 - [TailwindCSS](https://tailwindcss.com)
 - ...
 
-
 ## About me
 
 I am Minh from Berlin. Coding and desiging are my jobs 😁
 
 I hope you find this project useful!
+
+```
+
+```

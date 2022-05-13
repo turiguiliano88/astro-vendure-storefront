@@ -1,42 +1,91 @@
-# Welcome to [Astro](https://astro.build)
+# Astro Vendure storefront
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/starter)
+[Demo](https://astrossr.minh.berlin)
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Description
+
+This project attempts to deliever smooth e-commerce storefront experiences to customer/end user. It is powered by Vendure - headless commerce framework as backend and leveraging SSR functionalities and partial hydration on client side that Astro gives us.
+
+## Features
+
+support common ecommerce flow such as ordering and managing profile.
+
+- Order flow:
+  1. Add item to cart
+  2. Modify cart
+  3. Add shipping address
+  4. Authorize payment (dummy payment provider for now)
+
+- Profile management:
+  - Orders
+  - Addresses
+  - Account detail
 
 ## 🚀 Project Structure
 
 Inside of your Astro project, you'll see the following folders and files:
 
+### React components
+
+These are responsible for building UI components and interactivities on the client. As they are just React components, you can probably extract and use them anywhere else (in React project, or Nextjs project ...).
+It also follows design-guide carefully in order to create modern looking UI. By quickly modifying color primary / typography / spacing system in tailwind-themes.js you are good to go with your brand.
+
 ```
-/
-├── public/
-│   └── favicon.ico
 ├── src/
 │   ├── components/
-│   │   └── Layout.astro
-│   └── pages/
-│       └── index.astro
-└── package.json
+│   │   ├── ui
+│   │   │    └── Button
+│   │   │    └── Input
+│   │   │    └── ...
+│   │   ├── icon
+│   │   │    └── ShoppingBag
+│   │   │    └── Search
+│   │   │    └── ...
+│   │   ├── cart
+│   │   │    └── index.jsx
+│   │   │    └── ...
+│   │   ├── checkout
+│   │   │    └── index.jsx
+│   │   │    └── ...
+│   │   ├── product
+│   │   │    └── index.jsx
+│   │   │    └── ...
+│   │   ├── profile
+│   │   │    └── index.jsx
+│   │   │    └── ...
+│   │   ├── login
+│   │   │    └── index.jsx
+│   │   │    └── ...
+│   │   ├── register
+│   │   │    └── index.jsx
+│   │   │    └── ...
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+### Astro components
+```
+├── src/
+│   ├── pages/
+│   │   └── index.astro
+│   │   └── login.astro
+│   │   └── register.astro
+│   │   └── cart.astro
+│   │   └── checkout.astro
+│   │   ├── product
+│   │   │    └── [slug].astro
+│   │   ├── collection
+│   │   │    └── [slug].astro
+│   ├── layouts/
+│   │   └── base.astro
+```
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components or layouts.
+## SSR functionalites
 
-Any static assets, like images, can be placed in the `public/` directory.
+Every request from browser will be examined on server to see if the customer is logged in or there is any active order by checking the cookie from the request header. The server will therefore redirect to proper route.
+This ensure that only proper customer/guest can see his/her private orders/info. It also makes Navbar always up-to-date.
 
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command           | Action                                       |
-| :---------------- | :------------------------------------------- |
-| `npm install`     | Installs dependencies                        |
-| `npm run dev`     | Starts local dev server at `localhost:3000`  |
-| `npm run build`   | Build your production site to `./dist/`      |
-| `npm run preview` | Preview your build locally, before deploying |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://github.com/withastro/astro) or jump into our [Discord server](https://astro.build/chat).
+## Powered by
+- [Astro](https://astro.build)
+- [Vendure](https://www.vendure.io)
+- [React](https://reactjs.org)
+- [TailwindCSS](https://tailwindcss.com)
+- ...

@@ -92,7 +92,7 @@ This ensure that only proper customer/guest can see his/her private orders/info.
 
 1. Animation
 2. Addresses management
-3. Writing test
+3. Catch eror, write test
 4. ...
 
 ## Powered by

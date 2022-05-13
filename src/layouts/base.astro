@@ -1,15 +1,8 @@
 ---
 import '../styles/global.css';
-// import Nav from '../components/Nav.jsx'
 import Footer from '../components/Footer'
-import { Spa } from 'astro-spa';
 
 const {title} = Astro.props;
-
-// const cookie = Astro.request.headers.get('cookie');
-
-// console.log('cookie', Astro.request.headers);
-// const activeOrder = await getActiveOrder();
 ---
 
 <html lang="end">
@@ -20,7 +13,6 @@ const {title} = Astro.props;
 	<title>{title}</title>
 </head>
 <body class="flex justify-center">
-    <!-- <Spa limit={10} scrollIntoView={false} /> -->
     <div class="w-full" id="root">
     <slot />
     <Footer />

@@ -20,14 +20,15 @@ export default function Payment({ setOrder, eligiblePaymentMethods }) {
     <form
       onSubmit={async (event) => {
         event.preventDefault();
-        setOrder(
-          (await addPaymentToOrder(paymentMethod?.code, { id: 12 }))
-            .addPaymentToOrder
-        );
-        // if (paymentMethod) await state.set
+        const data = (await addPaymentToOrder(paymentMethod?.code, { id: 12 }))
+          .addPaymentToOrder;
+        setOrder({ ...data, totalQuantity: null });
       }}
     >
       <div className="text-lg bg-neutral-100 p-sm mb-xs">Step 2: Payment</div>
+      <div className="text-sm my-xs text-neutral-700">
+        Please select the payment method and authorized with the provider.
+      </div>
       <div className="flex">
         {paymentMethods.map((item, index) => (
           <div className="flex items-center py-sm mr-sm" key={index}>

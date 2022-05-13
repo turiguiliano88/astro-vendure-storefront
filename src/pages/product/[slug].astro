@@ -1,7 +1,6 @@
 ---
 import Base from '../../layouts/base.astro';
 import { getProducts, getActiveOrder, getActiveCustomer } from '../../api/server';
-// import App from '../../components/App';
 import App from '../../components/product';
 
 export async function getStaticPaths() {
@@ -26,10 +25,9 @@ if (cookie) {
 	const activeCustomer = (await getActiveCustomer(cookie)).activeCustomer;
 	if (activeCustomer) customerName = activeCustomer?.firstName + ' ' + activeCustomer?.lastName;
 }
-const {slug} = Astro.params;
 const {product} = Astro.props;
 ---
 
 <Base title="product">
-<App client:load product={product} customerName={customerName} totalQuantity={totalQuantity} />
+<App client:load product={product} customerName={customerName} totalQuantity={totalQuantity} showSearchBox={true} />
 </Base>

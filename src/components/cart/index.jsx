@@ -1,12 +1,10 @@
 import OrderLine from "./OrderLine";
 import OrderSummary from "../OrderSummary";
 import { Card, CardTitle, CardContent } from "../ui/Card";
-import Button from "../ui/Button";
 import Nav from "../Nav";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
-export default function App({ order, customerName }) {
-  //   const [customer, setCustomer] = useState({});
+export default function App({ order, customerName, showSearchBox }) {
   const [localOrder, setLocalOrder] = useState(order);
 
   return (
@@ -14,6 +12,7 @@ export default function App({ order, customerName }) {
       <Nav
         customerName={customerName}
         totalQuantity={localOrder?.totalQuantity}
+        showSearchBox={showSearchBox}
       />
       <div className="max-w-7xl my-lg mx-auto">
         <div className="flex flex-wrap md:flex-nowrap">
@@ -34,7 +33,7 @@ export default function App({ order, customerName }) {
             </Card>
           </div>
           <div className="w-full md:w-1/3 bg-neutral-200 p-sm m-sm">
-            <OrderSummary order={localOrder} />
+            <OrderSummary order={localOrder} showCheckoutButton={true} />
           </div>
         </div>
       </div>

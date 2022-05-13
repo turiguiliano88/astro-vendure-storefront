@@ -1,6 +1,5 @@
 const colors = require("tailwindcss/colors");
 
-console.log("colors", colors.red);
 module.exports = {
   defaultTheme: {
     spacing: {
@@ -52,5 +51,3 @@ module.exports = {
     },
   },
 };
-
-// export default themes;

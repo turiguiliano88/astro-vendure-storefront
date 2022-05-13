@@ -4,17 +4,10 @@ import App from '../components/register'
 import { getActiveCustomer } from "../api/server";
 
 const cookie = Astro.request.headers.get('cookie');
-console.log('cookie', cookie);
-// let customer;
 if (cookie) {
 	const activeCustomer = (await getActiveCustomer(cookie)).activeCustomer;
-    console.log('acitve customer', activeCustomer); 
-	// if (activeCustomer) customer = activeCustomer;
     if (activeCustomer) return Astro.redirect('/profile');
 }
-// if (customer) {
-//     return Astro.redirect('/profile');
-// }
 ---
 
 <Base>

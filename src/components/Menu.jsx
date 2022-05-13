@@ -1,11 +1,6 @@
-import { useState } from "react";
 import ChevronRightIcon from "./icon/ChevronRight";
 
 export default function Menu(props) {
-  const options = ["Order", "Address", "Account"];
-  //   const active = "Order";
-  const [active, setActive] = useState("Order");
-  console.log("tabs", props.tabs);
   return (
     <div className="m-sm bg-white flex md:block">
       {props.tabs.map((item, index) => (

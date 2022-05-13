@@ -20,7 +20,6 @@ export default function Register({ setOrder }) {
           phoneNumber,
           emailAddress
         );
-        setOrder(data.setCustomerForOrder);
         await registerCustomerAccount(
           firstName,
           lastName,
@@ -28,6 +27,7 @@ export default function Register({ setOrder }) {
           emailAddress,
           password
         );
+        setOrder(data.setCustomerForOrder);
       }}
     >
       <div className="flex flex-wrap mb-xs ">
@@ -56,14 +56,14 @@ export default function Register({ setOrder }) {
           required
         />
       </div>
-      <div className="mb-xs">
+      {/* <div className="mb-xs">
         <Input
           type="password"
           label="Password*"
           onChange={(event) => setPassword(event.target.value)}
           required
         />
-      </div>
+      </div> */}
       <div className="mb-xs">
         <Input
           type="tel"
@@ -71,11 +71,28 @@ export default function Register({ setOrder }) {
           onChange={(event) => setPhoneNumber(event.target.value)}
         />
       </div>
-      <div className="mt-sm">
+      {/* <div className="mt-sm">
         <Button submit>Register and continue</Button>
-      </div>
+      </div> */}
       <div className="mb-sm">
-        <Button type="transparent">Continue as guest</Button>
+        <Button
+          type="transparent"
+          onClick={async () => {
+            const data = await setCustomerForOrder(
+              firstName,
+              lastName,
+              phoneNumber,
+              emailAddress
+            );
+            if (data.setCustomerForOrder?.message) {
+              alert(data.setCustomerForOrder?.message);
+            } else {
+              setOrder(data.setCustomerForOrder);
+            }
+          }}
+        >
+          Continue as guest
+        </Button>
       </div>
     </form>
   );

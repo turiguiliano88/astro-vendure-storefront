@@ -2,6 +2,7 @@ import Input from "./ui/Input";
 import SearchIcon from "./icon/Search";
 import { useState, useEffect } from "react";
 import { search } from "../api/client";
+
 export default function ElasticSearch() {
   const [items, setItems] = useState([]);
   const [term, setTerm] = useState("");
@@ -10,7 +11,6 @@ export default function ElasticSearch() {
     const timeOutId = setTimeout(async () => {
       if (term) {
         const data = await search(term);
-        console.log("data", data);
         if (data.search.totalItems > 0) {
           setItems(data.search.items);
         } else {
@@ -38,9 +38,13 @@ export default function ElasticSearch() {
           <div className="absolute bg-white w-full border-2 border-neutral-200">
             {items.map((item, index) => (
               <div key={index} className="px-sm py-xs hover:bg-neutral-200">
-                <a href={`/product/${item.slug}`} className="block">
-                  {item?.productName}
-                </a>
+                {item.productName === "No product found." ? (
+                  item.productName
+                ) : (
+                  <a href={`/product/${item.slug}`} className="block">
+                    {item?.productName}
+                  </a>
+                )}
               </div>
             ))}
           </div>

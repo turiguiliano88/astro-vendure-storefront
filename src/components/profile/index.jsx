@@ -3,15 +3,14 @@ import ProfileOrder from "./Order";
 import ProfileAccount from "./Account";
 import ProfileAddress from "./Address";
 import Button from "../ui/Button";
-import { useState, useCallback, useEffect } from "react";
+import { useState } from "react";
 import Nav from "../Nav";
 import { logout } from "../../api/client";
-// import Login from "../login/Login";
+
 export default function Profile({ customer, totalQuantity }) {
   const [activeTab, setActiveTab] = useState("Order");
   const [localCustomer, setCustomer] = useState(customer);
 
-  console.log("customer", customer);
   const options = ["Order", "Address", "Account"].map((item) => {
     return {
       name: item,
@@ -48,14 +47,7 @@ export default function Profile({ customer, totalQuantity }) {
               <ProfileOrder orders={customer?.orders?.items} />
             )}
             {activeTab === "Account" && (
-              <ProfileAccount
-                // firstName={customer.firstName}
-                // lastName={customer.lastName}
-                // phoneNumber={customer.phoneNumber}
-                // emailAddress={customer.emailAddress}
-                customer={customer}
-                setCustomer={setCustomer}
-              />
+              <ProfileAccount customer={customer} setCustomer={setCustomer} />
             )}
             {activeTab === "Address" && (
               <ProfileAddress addresses={customer.addresses} />

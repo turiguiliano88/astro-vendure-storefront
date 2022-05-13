@@ -1,5 +1,3 @@
-// import SelectorIcon from "../icon/Selector";
-
 export default function Select(props) {
   return (
     <div className="text-neutral-800 flex flex-col">
@@ -17,7 +15,6 @@ export default function Select(props) {
               </option>
             ))}
         </select>
-        {/* <SelectorIcon className="w-4 h-4 text-neutral-600" /> */}
       </div>
     </div>
   );

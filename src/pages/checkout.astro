@@ -5,18 +5,13 @@ import { getActiveCustomer, getActiveOrder } from "../api/server";
 import {getEligiblePaymentMethods, getEligibleShippingMethods} from '../api/server'
 
 const cookie = Astro.request.headers.get('cookie');
-console.log('cookie', cookie);
 let order, customer, eligiblePaymentMethods, eligibleShippingMethods;
 if (cookie) {
 	order = (await getActiveOrder(cookie)).activeOrder;
-	console.log('order checkout', order)
 	const activeCustomer = (await getActiveCustomer(cookie)).activeCustomer;
-    console.log('acitve customer', activeCustomer); 
 	if (activeCustomer) customer = activeCustomer;
 }
-	console.log('methods ', await getEligibleShippingMethods());
 if (!cookie || !order) {
-    console.log('run into')
     return Astro.redirect('/');
 }
 eligiblePaymentMethods = (await getEligiblePaymentMethods()).eligiblePaymentMethods;

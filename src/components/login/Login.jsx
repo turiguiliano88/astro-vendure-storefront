@@ -2,13 +2,8 @@ import Button from "../ui/Button";
 import Input from "../ui/Input";
 import { Card, CardContent, CardTitle } from "../ui/Card";
 import Check from "../ui/Check";
-// import { createClient } from "../../utils/client";
-// import { onMount, createSignal } from "solid-js";
-import { useEffect, useState } from "react";
-import { login, getActiveCustomer } from "../../api/client";
-// import Link from "next/link";
-// import { useState } from "react";
-// import { state } from "../../store";
+import { useState } from "react";
+import { login } from "../../api/client";
 
 export default function Login({ setCustomer }) {
   const [email, setEmail] = useState("");
@@ -19,12 +14,8 @@ export default function Login({ setCustomer }) {
     <form
       onSubmit={async (event) => {
         event.preventDefault();
-        // alert("submit");
-        const id = await login(email, password, rememberMe);
-        console.log(id);
-        // const data = await getActiveCustomer();
-        // setCustomer(data.activeCustomer);
-        window.location.href = "/";
+        await login(email, password, rememberMe);
+        window.location.href = "/profile";
       }}
     >
       <Card>
@@ -55,7 +46,7 @@ export default function Login({ setCustomer }) {
           <div className="self-start">
             <Button submit>Login</Button>
           </div>
-          <div className="my-sm h-[2px] bg-neutral-800" />
+          <hr className="my-sm text-neutral-200" />
           <div className="text-gray-500">
             <span>Don't have an account? </span>
             <a className="text-primary">Sign up</a>

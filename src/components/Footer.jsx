@@ -20,7 +20,9 @@ export default function Footer() {
         </div>
         <div className="flex flex-col p-md text-neutral-700 text-sm">
           <span className="font-semibold text-base mb-xxs">Contact</span>
-          <span>info@muavagui.de</span>
+          <span>
+            <a href="mailto:admin@minh.berlin">admin@minh.berlin</a>
+          </span>
         </div>
       </div>
       <hr className="my-sm" />

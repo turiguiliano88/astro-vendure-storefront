@@ -1,18 +1,12 @@
 import { Card, CardContent, CardTitle } from "../ui/Card";
 import Button from "../ui/Button";
 import Badge from "../ui/Badge";
-// import { state } from "../../store";
-// import { For, Show } from "solid-js";
+
 export default function ProfileAddress({ addresses }) {
   return (
     <Card>
       <CardTitle>
-        <div className="flex items-center">
-          Shipping address
-          <span className="text-sm ml-sm">
-            <Button>Add new</Button>
-          </span>
-        </div>
+        <div className="flex items-center">Shipping address</div>
       </CardTitle>
       <CardContent>
         {addresses?.map((item, index) => (

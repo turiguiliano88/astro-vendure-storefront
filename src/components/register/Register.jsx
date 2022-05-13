@@ -1,11 +1,8 @@
 import Button from "../ui/Button";
 import Input from "../ui/Input";
 import { Card, CardContent, CardTitle } from "../ui/Card";
-import Select from "../ui/Select";
 import { registerCustomerAccount } from "../../api/client";
 import { useState } from "react";
-// import TermsOfUse from "./TermsOfUse";
-// import countries from "../../lib/countries.js";
 
 export default function SignUp() {
   const [firstName, setFirstName] = useState("");
@@ -17,7 +14,6 @@ export default function SignUp() {
     <form
       onSubmit={async (event) => {
         event.preventDefault();
-        // alert("submit");
         const data = await registerCustomerAccount(
           firstName,
           lastName,
@@ -75,12 +71,9 @@ export default function SignUp() {
             <Button submit>Sign up</Button>
           </div>
           <hr className="my-sm text-neutral-200" />
-          <div className="self-start text-gray-500">
+          <div className="self-start text-neutral-500">
             By clicking the 'Sign up' button, you confirm that you accept our{" "}
-            <span
-              className="underline cursor-pointer text-primary"
-              // onClick={() => setShowModal(!showModal)}
-            >
+            <span className="underline cursor-pointer text-primary">
               Term of Use
             </span>{" "}
             and{" "}
@@ -88,13 +81,8 @@ export default function SignUp() {
               Privacy Policy
             </span>
           </div>
-          {/* </div> */}
         </CardContent>
       </Card>
-      {/* <TermsOfUse
-        enabled={showModal}
-        trigger={() => setShowModal(!showModal)}
-      /> */}
     </form>
   );
 }

@@ -7,6 +7,6 @@ import turbolinks from "@astrojs/turbolinks";
 
 // https://astro.build/config
 export default defineConfig({
-  integrations: [react(), tailwind(), turbolinks()],
-  adapter: nodejs()
+  integrations: [react(), tailwind()],
+  adapter: nodejs(),
 });

@@ -4,14 +4,7 @@ import Button from "../ui/Button";
 import { updateCustomer } from "../../api/client";
 import { useState } from "react";
 
-export default function ProfileAccount({
-  // firstName,
-  // lastName,
-  // phoneNumber,
-  // emailAddress,
-  customer,
-  setCustomer,
-}) {
+export default function ProfileAccount({ customer, setCustomer }) {
   const [firstName, setFirstName] = useState(customer.firstName);
   const [lastName, setLastName] = useState(customer.lastName);
   const [phoneNumber, setPhoneNumber] = useState(customer.phoneNumber);

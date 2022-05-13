@@ -1,5 +1,4 @@
 import { Card, CardContent, CardTitle } from "../ui/Card";
-import date from "date-and-time";
 import Disclosure from "../ui/Disclosure";
 import OrderLine from "../cart/OrderLine";
 
@@ -33,7 +32,11 @@ export default function ProfileOrder({ orders }) {
                       <OrderLine key={index} line={line} />
                     </div>
                   ))}
-                  <div className="my-sm h-[2px] bg-neutral-400" />
+                  <hr className="my-sm text-neutral-200" />
+                  <div className="flex justify-between p-xs font-medium">
+                    <span>Shipping: </span>
+                    <span>€{order.shipping}</span>
+                  </div>
                   <div className="flex justify-between p-xs font-medium">
                     <span>Total: </span>
                     <span>€{order.total}</span>

@@ -23,7 +23,9 @@ export default function MiniCart({
         }
       >
         <div className="p-md">
-          <p className="mb-xs">You have {totalQuantity} items.</p>
+          <p className="mb-xs">
+            You have {totalQuantity} {totalQuantity > 1 ? "items" : "item"}.
+          </p>
           <a href="/cart">
             <Button>View cart</Button>
           </a>

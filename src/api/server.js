@@ -244,3 +244,55 @@ export async function transitionOrderToState(state, cookie) {
     cookie
   );
 }
+
+export async function getCollections() {
+  return await createQuery({
+    query: `
+    query {
+      collections {
+        items {
+          name
+          slug
+          featuredAsset {
+            preview
+          }
+          productVariants {
+            items {
+              name
+              product {
+                id
+                name
+                slug
+                featuredAsset {
+                  preview
+                }
+                variants {
+                  price
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    `,
+  });
+}
+
+export async function getCollectionsShort() {
+  return await createQuery({
+    query: `
+    query {
+      collections {
+        items {
+          name
+          slug
+          featuredAsset {
+            preview
+          }
+        }
+      }
+    }
+    `,
+  });
+}

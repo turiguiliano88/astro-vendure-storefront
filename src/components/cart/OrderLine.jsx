@@ -1,10 +1,8 @@
 import Select from "../ui/Select";
 import { adjustOrderLine, removeOrderLine } from "../../api/client";
 import TrashIcon from "../icon/Trash";
-import Input from "../ui/Input";
 
 export default function OrderLine({ line, quantities, setOrder }) {
-  // const quantit = [1, 2, 3, 4, 5, 6, 7];
   return (
     <div className="flex justify-center text-neutral-600">
       <div className="w-[80px] md:w-[120px] flex p-xs justify-center">
@@ -27,7 +25,6 @@ export default function OrderLine({ line, quantities, setOrder }) {
                     return {
                       name: item,
                       value: item,
-                      // selected: item == line.quantity ? true : false,
                     };
                   })}
                   selected={line.quantity}
@@ -40,9 +37,6 @@ export default function OrderLine({ line, quantities, setOrder }) {
                     setOrder(data.adjustOrderLine);
                   }}
                 />
-                {/* <div className="">
-                  <Input type="number" />
-                </div> */}
                 <div
                   className="ml-xs cursor-pointer"
                   onClick={async () => {

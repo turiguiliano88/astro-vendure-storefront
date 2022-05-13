@@ -1,7 +1,3 @@
-import Input from "../ui/Input";
-import Button from "../ui/Button";
-import { useState } from "react";
-import { setCustomerForOrder, login } from "../../api/client";
 import Login from "./Login";
 import Register from "./Register";
 export default function CustomerDetail({ setOrder }) {

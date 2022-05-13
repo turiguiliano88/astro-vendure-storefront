@@ -1,5 +1,3 @@
-import Link from "./ui/Link";
-
 export default function ItemCard({ name, price, img_url, path }) {
   return (
     <div className="relative h-full overflow-hidden">

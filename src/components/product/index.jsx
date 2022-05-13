@@ -1,10 +1,13 @@
 import Nav from "../Nav";
 import ProductCard from "./ProductCard";
-import { useEffect, useState, useCallback } from "react";
-// import { getActiveCustomer } from "../api/client";
-// import { getActiveOrder, getActiveCustomer } from "../api/client";
+import { useState } from "react";
 
-export default function App({ product, totalQuantity, customerName }) {
+export default function App({
+  product,
+  totalQuantity,
+  customerName,
+  showSearchBox,
+}) {
   const [showMiniCart, setShowMiniCart] = useState(false);
 
   const [orderQuantity, setOrderQuantity] = useState(totalQuantity);
@@ -15,6 +18,7 @@ export default function App({ product, totalQuantity, customerName }) {
         totalQuantity={orderQuantity}
         showMiniCart={showMiniCart}
         setShowMiniCart={setShowMiniCart}
+        showSearchBox={showSearchBox}
       />
       <div className="max-w-7xl my-lg mx-auto">
         <ProductCard

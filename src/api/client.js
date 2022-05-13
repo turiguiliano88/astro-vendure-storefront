@@ -162,7 +162,7 @@ export async function addPaymentToOrder(method, metadata) {
         metadata: $metadata
       }) {
         ... on Order {
-          id
+          ${OrderSchema}
         }
       }
     }`,
@@ -304,6 +304,10 @@ export async function setCustomerForOrder(
       }) {
         ... on Order {
           ${OrderSchema}
+        }
+        ... on EmailAddressConflictError {
+          message
+          errorCode
         }
       }
     }

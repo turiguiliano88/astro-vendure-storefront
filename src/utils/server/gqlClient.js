@@ -1,7 +1,4 @@
-// const gqlShopURL = import.meta.env.PUBLIC_SHOPAPI;
-const gqlShopURL = "http://localhost:3000/shop-api";
-
-// const cookie = Astro.request.headers.get("cookie");
+const gqlShopURL = import.meta.env.SERVER_SHOPAPI;
 
 export const createQuery = async ({ query, variables }, cookie) => {
   let headers = { "Content-Type": "application/json" };
@@ -15,12 +12,7 @@ export const createQuery = async ({ query, variables }, cookie) => {
     }),
     credentials: "include",
   });
-  // const auth_token = response.headers.get("vendure-auth-token");
-  // console.log("vendure token", auth_token);
-  // if (auth_token != null) {
-  //   token = auth_token;
-  //   localStorage.auth_token = auth_token;
-  // }
+
   const json = await response.json();
   return json.data;
 };

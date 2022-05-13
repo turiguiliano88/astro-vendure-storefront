@@ -1,9 +1,9 @@
 import { Card, CardTitle, CardContent } from "./ui/Card";
 import Button from "./ui/Button";
 
-export default function OrderSummary({ order }) {
+export default function OrderSummary({ order, showCheckoutButton }) {
   return (
-    <div>
+    <div className="h-fit">
       <Card>
         <CardTitle>Order Summary</CardTitle>
         <CardContent>
@@ -20,9 +20,11 @@ export default function OrderSummary({ order }) {
             <span>Total</span>
             <span>€{order?.total}</span>
           </div>
-          <a href="/checkout">
-            <Button>Checkout</Button>
-          </a>
+          {showCheckoutButton && (
+            <a href="/checkout">
+              <Button>Checkout</Button>
+            </a>
+          )}
         </CardContent>
       </Card>
     </div>

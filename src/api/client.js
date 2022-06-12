@@ -99,6 +99,9 @@ export async function login(username, password, rememberMe) {
           ... on CurrentUser {
             id
           }
+          ... on InvalidCredentialsError {
+            message
+          }
         }
       }
     `,

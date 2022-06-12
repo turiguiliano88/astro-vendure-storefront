@@ -10,6 +10,7 @@ import { logout } from "../../api/client";
 export default function Profile({ customer, totalQuantity }) {
   const [activeTab, setActiveTab] = useState("Order");
   const [localCustomer, setCustomer] = useState(customer);
+  const [isLoading, setIsLoading] = useState(false);
 
   const options = ["Order", "Address", "Account"].map((item) => {
     return {
@@ -33,9 +34,15 @@ export default function Profile({ customer, totalQuantity }) {
             <div className="p-sm">
               <Button
                 type="neutral"
+                isLoading={isLoading}
                 onClick={async () => {
-                  await logout();
-                  window.location.href = "/";
+                  setIsLoading(true);
+                  const res = await logout();
+                  if (res.logout.success) {
+                    window.location.href = "/";
+                  } else {
+                    setIsLoading(false);
+                  }
                 }}
               >
                 Logout

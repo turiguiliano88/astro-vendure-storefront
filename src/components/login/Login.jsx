@@ -9,18 +9,31 @@ export default function Login({ setCustomer }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   return (
     <form
       onSubmit={async (event) => {
         event.preventDefault();
-        await login(email, password, rememberMe);
-        window.location.href = "/profile";
+        setErrorMessage("");
+        setIsLoading(true);
+        const res = await login(email, password, rememberMe);
+        console.log("res", res);
+        if (res.login.message) {
+          setIsLoading(false);
+          setErrorMessage(res.login.message);
+        } else if (res.login.id) {
+          window.location.href = "/profile";
+        }
       }}
     >
       <Card>
         <CardTitle>Log In</CardTitle>
         <CardContent>
+          {errorMessage && (
+            <div className="my-xs text-red-600">{errorMessage}</div>
+          )}
           <div className="mb-xs">
             <Input
               label="Email*"
@@ -44,7 +57,9 @@ export default function Login({ setCustomer }) {
             />
           </div>
           <div className="self-start">
-            <Button submit>Login</Button>
+            <Button submit isLoading={isLoading}>
+              Login
+            </Button>
           </div>
           <hr className="my-sm text-neutral-200" />
           <div className="text-gray-500">

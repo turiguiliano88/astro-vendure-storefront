@@ -1,3 +1,4 @@
+import SpinnerIcon from "../icon/Spinner";
 export default function Button(props) {
   let styleColor;
   switch (props.type) {
@@ -12,8 +13,7 @@ export default function Button(props) {
         "bg-transparent hover:before:content-['→_'] hover:ring-transparent text-neutral-900";
       break;
     default:
-      styleColor =
-        "bg-primary text-white hover:ring-primary/40 hover:before:content-['→_']";
+      styleColor = "bg-primary text-white";
       break;
   }
 
@@ -30,16 +30,20 @@ export default function Button(props) {
       break;
   }
 
-  let loadingStyle = props.isLoading ? "animate-pulse" : "";
+  let loadingStyle = props.isLoading ? "" : "";
   return (
     <button
       onClick={props.onClick}
       type={props.submit ? "submit" : "button"}
       // className={`${styleColor} ${styleSize} transition flex-initial rounded-lg hover:ring-2 active:opacity-70 hover:before:content-['→_']`}
-      className={`${styleColor} ${styleSize} ${loadingStyle} transition flex-initial rounded-lg hover:ring-2 active:opacity-70`}
+      className={`${styleColor} ${styleSize} ${loadingStyle} transition flex-initial rounded-lg hover:ring-2 hover:ring-primary/40 active:opacity-70`}
       disabled={props.isLoading}
     >
-      {props.children}
+      {props.isLoading ? (
+        <SpinnerIcon className="h-3 w-3 border-white" />
+      ) : (
+        props.children
+      )}
     </button>
   );
 }

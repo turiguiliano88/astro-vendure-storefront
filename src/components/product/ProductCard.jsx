@@ -10,15 +10,19 @@ export default function ProductCard({
 }) {
   const [currentVariant, setCurrentVariant] = useState(product.variants[0]);
   const [quantity, setQuantity] = useState(1);
+  const [isLoading, setIsLoading] = useState(false);
 
   const addToBag = async () => {
+    setIsLoading(true);
     const data = await addItemToOrder({
       productVariantId: currentVariant.id,
       quantity: Number(quantity),
     });
-    console.log("data ", data);
+    // console.log("data ", data);
+    setIsLoading(false);
     setOrderQuantity(data.addItemToOrder?.totalQuantity);
     setShowMiniCart(true);
+    window.scroll(0, 0);
   };
   return (
     <div className="flex p-sm flex-wrap md:flex-nowrap">
@@ -61,7 +65,9 @@ export default function ProductCard({
               onChange={(event) => setQuantity(event.target.value)}
             />
           </div>
-          <Button onClick={addToBag}>Add to bag</Button>
+          <Button onClick={addToBag} isLoading={isLoading}>
+            Add to bag
+          </Button>
         </div>
       </div>
     </div>

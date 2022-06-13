@@ -1,8 +1,6 @@
 ---
 import Base from '../layouts/base.astro';
-import Nav from '../components/Nav'
-import { CardTitle, CardContent, Card } from '../components/ui/Card';
-import ItemCard from '../components/ItemCard';
+import App from '../components/home'
 import { getProducts, getActiveCustomer, getActiveOrder, getCollectionsShort } from '../api/server';
 
 const data = await getProducts(10);
@@ -10,55 +8,9 @@ const products = data.products;
 
 const collections = (await getCollectionsShort()).collections;
 
-const cookie = Astro.request.headers.get('cookie');
-let totalQuantity, customerName;
-if (cookie) {
-	totalQuantity = (await getActiveOrder(cookie)).activeOrder?.totalQuantity;
-	const activeCustomer = (await getActiveCustomer(cookie)).activeCustomer;
-	if (activeCustomer) customerName = activeCustomer?.firstName + ' ' + activeCustomer?.lastName;
-}
 
 ---
 
 <Base title="Home">
-	<Nav client:load customerName={customerName} totalQuantity={totalQuantity} showSearchBox={true} />
-	<div class="max-w-7xl my-lg mx-auto">
-		<div>
-			<Card>
-			<CardTitle>Collections</CardTitle>
-			<CardContent>
-				<div class="flex flex-wrap">
-				{collections.items?.map((item) => {
-					return (
-					<div class="w-1/2 md:w-1/3 xl:w-1/4 p-xxs md:p-xs">
-						<a href={`/collection/${item.slug}`}>{item.name}</a>
-					</div>
-					);
-				})}
-				</div>
-			</CardContent>
-			</Card>
-		</div>
-		<div>
-			<Card>
-			<CardTitle>Top products</CardTitle>
-			<CardContent>
-				<div class="flex flex-wrap">
-				{products.items?.map((item) => {
-					return (
-					<div class="w-1/2 md:w-1/3 xl:w-1/4 p-xxs md:p-xs">
-						<ItemCard
-						img_url={item.featuredAsset.preview}
-						path={`/product/${item.slug}`}
-						name={item.name}
-						price={item.variants[0].price}
-						/>
-					</div>
-					);
-				})}
-				</div>
-			</CardContent>
-			</Card>
-		</div>
-	</div>
+<App client:load products={products} collections={collections} />
 </Base>

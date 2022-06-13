@@ -3,14 +3,27 @@ import ProfileOrder from "./Order";
 import ProfileAccount from "./Account";
 import ProfileAddress from "./Address";
 import Button from "../ui/Button";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Nav from "../Nav";
-import { logout } from "../../api/client";
+import useActiveData from "../useActiveData";
 
-export default function Profile({ customer, totalQuantity }) {
+export default function Profile() {
   const [activeTab, setActiveTab] = useState("Order");
-  const [localCustomer, setCustomer] = useState(customer);
+  // const [customer, setCustomer] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [totalQuantity, setToltalQuantity] = useState(null);
+
+  // useEffect(() => {
+  //   async function fetchData() {
+  //     const customer = (await getActiveCustomer()).getActiveCustomer;
+  //     customer &&
+  //       setCustomerName(`${customer.firstName} ${customer.lastName}'`);
+  //     const order = (await getActiveOrder()).getActiveOrder;
+  //     order && setToltalQuantity(order.totalQuantity);
+  //   }
+  // }, [])
+  const [customer, order] = useActiveData();
+  console.log("customer", customer);
 
   const options = ["Order", "Address", "Account"].map((item) => {
     return {
@@ -24,7 +37,9 @@ export default function Profile({ customer, totalQuantity }) {
   return (
     <div>
       <Nav
-        customerName={`${localCustomer?.firstName} ${localCustomer?.lastName}`}
+        customerName={
+          customer && `${customer?.firstName} ${customer?.lastName}`
+        }
         totalQuantity={totalQuantity}
       />
       <div className="max-w-7xl mx-auto">
@@ -49,7 +64,7 @@ export default function Profile({ customer, totalQuantity }) {
               </Button>
             </div>
           </div>
-          <div className="grow">
+          {/* <div className="grow">
             {activeTab === "Order" && (
               <ProfileOrder orders={customer?.orders?.items} />
             )}
@@ -59,7 +74,7 @@ export default function Profile({ customer, totalQuantity }) {
             {activeTab === "Address" && (
               <ProfileAddress addresses={customer.addresses} />
             )}
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

@@ -10,7 +10,7 @@ export default function Button(props) {
       break;
     case "transparent":
       styleColor =
-        "bg-transparent hover:before:content-['→_'] hover:ring-transparent text-neutral-900";
+        "bg-transparent hover:before:content-['→_'] hover:ring-transparent text-neutral-900 font-semibold";
       break;
     default:
       styleColor = "bg-primary text-white";
@@ -40,7 +40,7 @@ export default function Button(props) {
       disabled={props.isLoading}
     >
       {props.isLoading ? (
-        <SpinnerIcon className="h-3 w-3 border-white" />
+        <SpinnerIcon className="h-4 w-4 border-white" />
       ) : (
         props.children
       )}

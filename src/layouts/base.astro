@@ -2,20 +2,22 @@
 import '../styles/global.css';
 import Footer from '../components/Footer'
 
-const {title} = Astro.props;
+const { title } = Astro.props;
 ---
 
 <html lang="end">
+
 <head>
     <meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width">
-    <link rel="stylesheet" href="../node_modules/@splidejs/react-splide/dist/css/splide.min.css">
-	<title>{title}</title>
+    <meta name="viewport" content="width=device-width">
+    <title>{title}</title>
 </head>
+
 <body class="flex justify-center">
     <div class="w-full" id="root">
-    <slot />
-    <Footer />
+        <slot />
+        <Footer />
     </div>
 </body>
+
 </html>

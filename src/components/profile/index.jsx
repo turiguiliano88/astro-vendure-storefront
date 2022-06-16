@@ -6,6 +6,7 @@ import Button from "../ui/Button";
 import { useState, useEffect } from "react";
 import Nav from "../Nav";
 import { useStore } from "../store";
+import { logout } from "../../api/client";
 
 export default function Profile() {
   const [activeTab, setActiveTab] = useState("Order");

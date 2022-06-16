@@ -10,10 +10,14 @@ export default function SignUp() {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [password, setPassword] = useState("");
   const [emailAddress, setEmailAddress] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
   return (
     <form
       onSubmit={async (event) => {
         event.preventDefault();
+        setErrorMessage("");
+        setIsLoading(true);
         const data = await registerCustomerAccount(
           firstName,
           lastName,
@@ -21,13 +25,20 @@ export default function SignUp() {
           emailAddress,
           password
         );
-        if (data.registerCustomerAccount?.success)
+        if (data.registerCustomerAccount?.success) {
           window.location.href = "/login";
+        } else {
+          setIsLoading(false);
+          setErrorMessage("There is error while registering!");
+        }
       }}
     >
       <Card>
         <CardTitle>Register</CardTitle>
         <CardContent>
+          {errorMessage && (
+            <div className="my-xs text-red-600">{errorMessage}</div>
+          )}
           <div className="flex flex-wrap mb-xs">
             <div className="w-full md:w-6/12 pr-2">
               <Input
@@ -68,7 +79,9 @@ export default function SignUp() {
             />
           </div>
           <div className="my-xs">
-            <Button submit>Sign up</Button>
+            <Button submit isLoading={isLoading}>
+              Sign up
+            </Button>
           </div>
           <hr className="my-sm text-neutral-200" />
           <div className="self-start text-neutral-500">

@@ -4,11 +4,9 @@
 
 ## Description
 
-**[apply for Astro 1.0 hackathon Best SSR project]**
+This project attempts to deliever smooth, mobile-friendly e-commerce storefront experiences to customer/end user. It is powered by Vendure - headless commerce framework as backend and ~~leveraging SSR functionalities~~ and partial hydration on client side that Astro gives us.
 
-This project attempts to deliever smooth e-commerce storefront experiences to customer/end user. It is powered by Vendure - headless commerce framework as backend and leveraging SSR functionalities and partial hydration on client side that Astro gives us.
-
-**Warning: It is far from ready for production 😜**
+**Due to the instability and server's performance, I am switching to SSG for the moment. If you're interested in SSR version in the main branch, you can check out branch /ssr also in this repository**
 
 ## Features
 
@@ -97,17 +95,11 @@ These are responsible for api logic serving only in server or public for client.
 │   │   └── server.js
 ```
 
-## SSR functionalites
-
-Every request from browser will be examined on server to see if the customer is logged in or there is any active order by checking the cookie from the request header. The server will therefore redirect to proper route.
-This ensure that only proper customer/guest can see his/her private orders/info. It also makes Navbar always up-to-date.
-
 ## Future improvements
 
-1. Animation
-2. Addresses management
-3. Catch eror, write test
-4. ...
+1. Addresses management
+2. Write test
+3. ...
 
 ## Powered by
 

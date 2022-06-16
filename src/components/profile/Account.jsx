@@ -3,11 +3,13 @@ import Input from "../ui/Input";
 import Button from "../ui/Button";
 import { updateCustomer } from "../../api/client";
 import { useState } from "react";
+import { useStore } from "../store";
 
-export default function ProfileAccount({ customer, setCustomer }) {
+export default function ProfileAccount({ customer }) {
   const [firstName, setFirstName] = useState(customer.firstName);
   const [lastName, setLastName] = useState(customer.lastName);
   const [phoneNumber, setPhoneNumber] = useState(customer.phoneNumber);
+  const setCustomer = useStore((state) => state.setCustomer);
   return (
     <Card>
       <CardTitle>Account</CardTitle>

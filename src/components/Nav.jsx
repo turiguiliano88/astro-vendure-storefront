@@ -1,8 +1,6 @@
 import Button from "../components/ui/Button";
 import ElasticSearch from "./ElasticSearch";
 import MiniCart from "./MiniCart";
-// import { getActiveCustomer, getActiveOrder } from "../api/client";
-// import { useEffect, useState } from "react";
 
 export default function Nav({
   showMiniCart,
@@ -11,18 +9,6 @@ export default function Nav({
   customerName,
   totalQuantity,
 }) {
-  // const [customerName, setCustomerName] = useState("");
-  // const [totalQuantity, setToltalQuantity] = useState(null);
-  // useEffect(() => {
-  //   async function fetchData() {
-  //     const customer = (await getActiveCustomer()).getActiveCustomer;
-  //     customer &&
-  //       setCustomerName(`${customer.firstName} ${customer.lastName}'`);
-  //     const order = (await getActiveOrder()).getActiveOrder;
-  //     order && setToltalQuantity(order.totalQuantity);
-  //   }
-  //   fetchData();
-  // }, []);
   return (
     <div className="m-sm">
       <div className="flex justify-between items-center">

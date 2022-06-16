@@ -1,11 +1,16 @@
 import Nav from "../Nav";
 import { Card, CardTitle, CardContent } from "../ui/Card";
 import ItemCard from "../ItemCard";
-import useActiveData from "../useActiveData";
+import { useStore } from "../store";
+import { useEffect } from "react";
 
 export default function App({ collections, products }) {
-  const [customer, order] = useActiveData();
-  console.log("customer", customer);
+  const customer = useStore((state) => state.customer);
+  const order = useStore((state) => state.order);
+  const fetchAll = useStore((state) => state.fetchAll);
+  useEffect(() => {
+    fetchAll();
+  }, []);
   return (
     <>
       <Nav
@@ -50,7 +55,7 @@ export default function App({ collections, products }) {
                         img_url={item.featuredAsset.preview}
                         path={`/product/${item.slug}`}
                         name={item.name}
-                        price={item.variants[0].price}
+                        price={item.variants[0].price / 100}
                       />
                     </div>
                   );

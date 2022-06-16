@@ -5,7 +5,7 @@ import Check from "../ui/Check";
 import { useState } from "react";
 import { login } from "../../api/client";
 
-export default function Login({ setCustomer }) {
+export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);

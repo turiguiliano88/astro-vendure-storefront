@@ -2,16 +2,26 @@ import OrderLine from "./OrderLine";
 import OrderSummary from "../OrderSummary";
 import { Card, CardTitle, CardContent } from "../ui/Card";
 import Nav from "../Nav";
-import { useState } from "react";
+import { useEffect } from "react";
+import { useStore } from "../store";
 
-export default function App({ order, customerName, showSearchBox }) {
-  const [localOrder, setLocalOrder] = useState(order);
+export default function App({ showSearchBox }) {
+  const customer = useStore((state) => state.customer);
+  const order = useStore((state) => state.order);
+  const fetchAll = useStore((state) => state.fetchAll);
+  const setOrder = useStore((state) => state.setOrder);
+  const loading = useStore((state) => state.loading);
 
+  useEffect(() => {
+    fetchAll();
+  }, []);
   return (
     <div>
       <Nav
-        customerName={customerName}
-        totalQuantity={localOrder?.totalQuantity}
+        customerName={
+          customer ? `${customer.firstName} ${customer.lastName}` : null
+        }
+        totalQuantity={order?.totalQuantity}
         showSearchBox={showSearchBox}
       />
       <div className="max-w-7xl my-lg mx-auto">
@@ -20,20 +30,20 @@ export default function App({ order, customerName, showSearchBox }) {
             <Card>
               <CardTitle>Cart</CardTitle>
               <CardContent>
-                {localOrder?.lines &&
-                  localOrder?.lines.map((line, index) => (
+                {order?.lines &&
+                  order?.lines.map((line, index) => (
                     <OrderLine
                       key={index}
                       line={line}
                       quantities={[1, 2, 3]}
-                      setOrder={setLocalOrder}
+                      setOrder={setOrder}
                     />
                   ))}
               </CardContent>
             </Card>
           </div>
           <div className="w-full md:w-1/3 bg-neutral-200 p-sm m-sm">
-            <OrderSummary order={localOrder} showCheckoutButton={true} />
+            <OrderSummary order={order} showCheckoutButton={true} />
           </div>
         </div>
       </div>

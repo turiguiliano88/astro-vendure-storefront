@@ -1,20 +1,8 @@
 ---
 import Base from "../layouts/base.astro";
 import App from '../components/cart'
-import { getActiveCustomer, getActiveOrder } from "../api/server";
-
-const cookie = Astro.request.headers.get('cookie');
-let order, customerName;
-if (cookie) {
-	order = (await getActiveOrder(cookie)).activeOrder;
-	const activeCustomer = (await getActiveCustomer(cookie)).activeCustomer;
-	if (activeCustomer) customerName = activeCustomer?.firstName + ' ' + activeCustomer?.lastName;
-}
-if (!cookie || !order) {
-    return Astro.redirect('/');
-}
 ---
 
 <Base>
-<App client:load order={order} customerName={customerName} showSearchBox={true} />
+<App client:load showSearchBox={true} />
 </Base>

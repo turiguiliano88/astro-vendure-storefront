@@ -5,9 +5,9 @@ import {
   getEligiblePaymentMethods,
   transitionOrderToState,
 } from "../../api/client";
-export default function Payment({ setOrder, eligiblePaymentMethods }) {
+export default function Payment({ setOrder }) {
   const [paymentMethod, setPaymentMethod] = useState({});
-  const [paymentMethods, setPaymentMethods] = useState(eligiblePaymentMethods);
+  const [paymentMethods, setPaymentMethods] = useState([]);
 
   useEffect(() => {
     async function fetchPaymentMethods() {

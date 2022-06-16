@@ -8,11 +8,9 @@ import {
   transitionOrderToState,
 } from "../../api/client";
 
-export default function Shipping({ setOrder, eligibleShippingMethods }) {
+export default function Shipping({ setOrder }) {
   const [shippingMethod, setShippingMethod] = useState(0);
-  const [shippingMethods, setShippingMethods] = useState(
-    eligibleShippingMethods
-  );
+  const [shippingMethods, setShippingMethods] = useState([]);
   const [fullName, setFullName] = useState("");
   const [streetLine1, setStreetLine1] = useState("");
   const [streetLine2, setStreetLine2] = useState("");

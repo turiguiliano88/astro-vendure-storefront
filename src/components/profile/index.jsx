@@ -5,25 +5,19 @@ import ProfileAddress from "./Address";
 import Button from "../ui/Button";
 import { useState, useEffect } from "react";
 import Nav from "../Nav";
-import useActiveData from "../useActiveData";
+import { useStore } from "../store";
 
 export default function Profile() {
   const [activeTab, setActiveTab] = useState("Order");
-  // const [customer, setCustomer] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const [totalQuantity, setToltalQuantity] = useState(null);
 
-  // useEffect(() => {
-  //   async function fetchData() {
-  //     const customer = (await getActiveCustomer()).getActiveCustomer;
-  //     customer &&
-  //       setCustomerName(`${customer.firstName} ${customer.lastName}'`);
-  //     const order = (await getActiveOrder()).getActiveOrder;
-  //     order && setToltalQuantity(order.totalQuantity);
-  //   }
-  // }, [])
-  const [customer, order] = useActiveData();
-  console.log("customer", customer);
+  const customer = useStore((state) => state.customer);
+  const order = useStore((state) => state.order);
+  const fetchAll = useStore((state) => state.fetchAll);
+
+  useEffect(() => {
+    fetchAll();
+  }, []);
 
   const options = ["Order", "Address", "Account"].map((item) => {
     return {
@@ -40,7 +34,7 @@ export default function Profile() {
         customerName={
           customer && `${customer?.firstName} ${customer?.lastName}`
         }
-        totalQuantity={totalQuantity}
+        totalQuantity={order?.totalQuantity}
       />
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-wrap">
@@ -64,17 +58,15 @@ export default function Profile() {
               </Button>
             </div>
           </div>
-          {/* <div className="grow">
+          <div className="grow">
             {activeTab === "Order" && (
               <ProfileOrder orders={customer?.orders?.items} />
             )}
-            {activeTab === "Account" && (
-              <ProfileAccount customer={customer} setCustomer={setCustomer} />
-            )}
+            {activeTab === "Account" && <ProfileAccount customer={customer} />}
             {activeTab === "Address" && (
               <ProfileAddress addresses={customer.addresses} />
             )}
-          </div> */}
+          </div>
         </div>
       </div>
     </div>

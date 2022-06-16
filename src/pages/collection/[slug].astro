@@ -1,64 +1,41 @@
 ---
 import Base from "../../layouts/base.astro";
-import { getCollections, getActiveCustomer, getActiveOrder } from "../../api/server";
-import ItemCard from "../../components/ItemCard";
-import Nav from "../../components/Nav";
-import { Card, CardContent, CardTitle } from "../../components/ui/Card";
+import { getCollections } from "../../api/server";
+import App from '../../components/collection'
 
 export async function getStaticPaths() {
-    const data = await getCollections();
+	const data = await getCollections();
 
-    return data.collections.items.map(item => {
-        let products = {};
-        item.productVariants.items.map(item => {
-            products[item.product.id] = item.product
-        })
-        return {
-            params: {
-                slug: item.slug
-            },
-            props: {
-                products: Object.values(products),
-                name: item.name
-            }
-        }
-    })
+	return data.collections.items.map(item => {
+		let products = {};
+		item.productVariants.items.map(item => {
+			products[item.product.id] = item.product
+		})
+		return {
+			params: {
+				slug: item.slug
+			},
+			props: {
+				products: Object.values(products),
+				name: item.name
+			}
+		}
+	})
 
 }
 
-const cookie = Astro.request.headers.get('cookie');
-let totalQuantity, customerName;
-if (cookie) {
-	totalQuantity = (await getActiveOrder(cookie)).activeOrder?.totalQuantity;
-	const activeCustomer = (await getActiveCustomer(cookie)).activeCustomer;
-	if (activeCustomer) customerName = activeCustomer?.firstName + ' ' + activeCustomer?.lastName;
-}
+// const cookie = Astro.request.headers.get('cookie');
+// let totalQuantity, customerName;
+// if (cookie) {
+// 	totalQuantity = (await getActiveOrder(cookie)).activeOrder?.totalQuantity;
+// 	const activeCustomer = (await getActiveCustomer(cookie)).activeCustomer;
+// 	if (activeCustomer) customerName = activeCustomer?.firstName + ' ' + activeCustomer?.lastName;
+// }
 
-const {name} = Astro.props;
-const {products} = Astro.props
+const { name } = Astro.props;
+const { products } = Astro.props
 ---
 
 <Base>
-	<Nav client:load customerName={customerName} totalQuantity={totalQuantity} showSearchBox={true} />
-	<div class="max-w-7xl my-lg mx-auto">
-		<Card>
-		<CardTitle>{name}</CardTitle>
-		<CardContent>
-			<div class="flex flex-wrap">
-			{products.map((item) => {
-				return (
-				<div class="w-1/2 md:w-1/3 xl:w-1/4 p-xxs md:p-xs">
-					<ItemCard
-					img_url={item.featuredAsset.preview}
-					path={`/product/${item.slug}`}
-					name={item.name}
-                    price={item.variants[0].price}
-					/>
-				</div>
-				);
-			})}
-			</div>
-		</CardContent>
-		</Card>
-	</div>
+<App client:load name={name} products={products} />
 </Base>

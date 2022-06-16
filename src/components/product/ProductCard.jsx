@@ -2,15 +2,13 @@ import Button from "../ui/Button";
 import Select from "../ui/Select";
 import { useState } from "react";
 import { addItemToOrder } from "../../api/client";
+import { useStore } from "../store";
 
-export default function ProductCard({
-  product,
-  setOrderQuantity,
-  setShowMiniCart,
-}) {
+export default function ProductCard({ product, setShowMiniCart }) {
   const [currentVariant, setCurrentVariant] = useState(product.variants[0]);
   const [quantity, setQuantity] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
+  const setOrderQuantity = useStore((state) => state.setOrderQuantity);
 
   const addToBag = async () => {
     setIsLoading(true);
@@ -32,7 +30,7 @@ export default function ProductCard({
       <div className="w-full md:w-2/3 p-xs md:p-sm">
         <h1 className="text-2xl font-semibold">{product.name}</h1>
         <div className="my-xs text-lg font-semibold">
-          €{currentVariant?.price * quantity}
+          €{(currentVariant?.price / 100) * quantity}
         </div>
         <div className="my-sm">
           <div dangerouslySetInnerHTML={{ __html: product.description }}></div>

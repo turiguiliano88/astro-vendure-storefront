@@ -52,7 +52,7 @@ export default function OrderLine({ line, quantities, setOrder }) {
           </div>
         </div>
         <div className="p-xs">
-          <span className="font-semibold">{`€${line.linePrice}`}</span>
+          <span className="font-semibold">{`€${line.linePrice / 100}`}</span>
         </div>
       </div>
     </div>
